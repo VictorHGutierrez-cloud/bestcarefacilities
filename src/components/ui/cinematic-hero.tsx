@@ -197,6 +197,9 @@ export function CinematicHero({
   const requestRef = useRef<number>(0);
   const ctxRef = useRef<gsap.Context | null>(null);
 
+  const onSiteToday = metricValue > 500 ? 87 : Math.max(metricValue - 13, 0);
+  const absencesToday = metricValue > 500 ? 13 : 13;
+
   const handleCtaClick = () => {
     ScrollTrigger.getAll().forEach((st) => st.kill());
     ctxRef.current?.revert();
@@ -415,11 +418,11 @@ export function CinematicHero({
                     <div className="phone-widget grid grid-cols-2 gap-2 mb-3">
                       <div className="widget-depth rounded-xl p-3">
                         <p className="text-white/40 text-[9px] uppercase tracking-wider">On site</p>
-                        <p className="text-white text-lg font-bold">{Math.max(metricValue - 13, 0)}</p>
+                        <p className="text-white text-lg font-bold">{onSiteToday}</p>
                       </div>
                       <div className="widget-depth rounded-xl p-3">
                         <p className="text-white/40 text-[9px] uppercase tracking-wider">Absences</p>
-                        <p className="text-[#FF355E] text-lg font-bold">13</p>
+                        <p className="text-[#FF355E] text-lg font-bold">{absencesToday}</p>
                       </div>
                     </div>
 

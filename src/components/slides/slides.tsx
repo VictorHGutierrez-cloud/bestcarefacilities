@@ -50,7 +50,7 @@ export const slides: SlideData[] = [
   {
     id: "cover",
     title: "Welcome",
-    summary: "Partnership proposal — Best Care Facilities",
+    summary: "Partnership proposal — Bestcare FM Kenya",
     icon: <FileText size={24} />,
     gradient: "from-[hsl(347,100%,20%)] to-[hsl(347,80%,10%)]",
     bg: "dark",
@@ -58,9 +58,10 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>Partnership Proposal</SectionLabel>
         <h1 className="text-[96px] font-light leading-[1.1] mb-8 max-w-[1500px]">{d.empresa}</h1>
-        <p className="opacity-80 font-light mb-6 text-6xl">Bridge the gap to one HR operating model</p>
-        <p className="opacity-60 font-light text-3xl">
-          Facility management at scale — without spreadsheets holding HR back
+        <p className="opacity-80 font-light mb-6 text-5xl">{d.tagline}</p>
+        <p className="opacity-60 font-light text-3xl max-w-[1300px]">
+          {d.location} — hard & soft FM at scale. One HR operating model for{" "}
+          {d.totalColaboradores}+ people running the business behind {d.professionalsNetwork} field specialists.
         </p>
         <div className="mt-16 flex items-center gap-6">
           <div className="w-12 h-12 border border-white/30 flex items-center justify-center">
@@ -79,8 +80,8 @@ export const slides: SlideData[] = [
 
   {
     id: "timeline",
-    title: "Best Care journey",
-    summary: "Facility services company growing with compliance at the core",
+    title: "Bestcare journey",
+    summary: "15+ years · 25 branches · integrated FM across Kenya",
     icon: <BarChart3 size={24} />,
     gradient: "from-[hsl(347,70%,18%)] to-[hsl(200,40%,12%)]",
     bg: "dark",
@@ -90,10 +91,10 @@ export const slides: SlideData[] = [
         <SlideTitle>Built on service. Ready for systems.</SlideTitle>
         <div className="grid grid-cols-4 gap-6 mt-10 border-t border-white/15 pt-10">
           {[
-            { stat: "100+", label: "Employees today" },
-            { stat: "Multi-site", label: "Client deployments" },
-            { stat: "Compliance", label: "Statutory filing discipline" },
-            { stat: "Growing", label: "Steady hiring, low turnover" },
+            { stat: d.yearsExperience, label: "Years of B2B FM expertise" },
+            { stat: String(d.branches), label: "Branches nationwide" },
+            { stat: d.professionalsNetwork, label: "Vetted professionals" },
+            { stat: d.monthlyClients, label: "Monthly clients served" },
           ].map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-[42px] font-light">{s.stat}</p>
@@ -102,9 +103,10 @@ export const slides: SlideData[] = [
           ))}
         </div>
         <p className="text-[24px] opacity-75 leading-[1.8] mt-12 max-w-[1200px]">
-          Best Care delivers cleaning, fumigation, landscaping, and related services across client sites.
-          Florence and the team run a <strong className="opacity-100">compliance-oriented</strong> operation —
-          the next chapter is matching process discipline with workforce technology.
+          You are Kenya&apos;s trusted integrated FM partner — {d.coreServices} across{" "}
+          {d.sectorsServed}. Rated <strong className="opacity-100">{d.googleRating}★</strong> (
+          {d.reviewCount}+ reviews). The next chapter is giving HR the same reliability you promise clients:{" "}
+          <strong className="opacity-100">SLA-grade workforce data</strong>, not spreadsheets.
         </p>
       </div>
     ),
@@ -124,13 +126,14 @@ export const slides: SlideData[] = [
         <div className="grid grid-cols-2 gap-16 mt-6">
           <div>
             <p className="text-[24px] opacity-75 leading-[1.8] mb-8">
-              You built a growing facility management business with{" "}
-              <strong className="opacity-100">Excel, tracking books, and determination</strong> — not with a
-              workforce platform built for distributed teams.
+              You coordinate <strong className="opacity-100">{d.professionalsNetwork} professionals</strong> and{" "}
+              {d.branches} branches with{" "}
+              <strong className="opacity-100">Excel, tracking books, and determination</strong> — not a workforce
+              platform built for multi-site FM.
             </p>
             <p className="text-[24px] opacity-75 leading-[1.8]">
-              Factorial enters with {d.partner}: one layer for time, documents, hiring, and compliance proof —
-              so HR stops reconciling and starts governing growth.
+              Factorial + {d.partner}: one HR layer for time, documents, hiring, and audit-ready records — so
+              leadership can scale clients and branches without HR becoming the bottleneck.
             </p>
           </div>
           <div className="space-y-6">
@@ -151,7 +154,7 @@ export const slides: SlideData[] = [
   {
     id: "context-overview",
     title: "Current scenario",
-    summary: "~100 employees, multi-client sites, HR trapped in operations",
+    summary: "25 branches · 2,000+ field pros · HR on manual rails",
     icon: <Eye size={24} />,
     gradient: "from-[hsl(347,60%,25%)] to-[hsl(347,50%,12%)]",
     bg: "light",
@@ -162,21 +165,22 @@ export const slides: SlideData[] = [
         <div className="grid grid-cols-2 gap-16 mt-4">
           <div>
             <p className="text-[26px] opacity-70 leading-[1.7] mb-8">
-              You manage around <strong className="opacity-100">{d.totalColaboradores} employees</strong> deployed
-              across client facilities. HR must stay compliant, keep payroll inputs accurate, and support managers
-              who cannot see coverage in real time.
+              You deliver <strong className="opacity-100">{d.servicePillars.join(" · ")}</strong> — {d.coreServices}.
+              HQ and branch HR (~<strong className="opacity-100">{d.totalColaboradores} seats</strong> in scope) must
+              govern a <strong className="opacity-100">{d.professionalsNetwork}-person</strong> field network across{" "}
+              {d.sectorsServed}.
             </p>
             <p className="text-[26px] opacity-70 leading-[1.7]">
-              The team is capable. The <strong className="opacity-100">tooling is the bottleneck</strong> — not
-              people.
+              Clients expect same-day response and SLA discipline. The team delivers that on site —{" "}
+              <strong className="opacity-100">HR tooling has not kept pace</strong>.
             </p>
           </div>
           <div className="space-y-5">
             {[
-              { icon: "📋", title: "Manual time capture", desc: "Excel and tracking books for attendance." },
-              { icon: "💬", title: "Informal channels", desc: "WhatsApp for speed — risk for contracts and IDs." },
-              { icon: "📊", title: "Payroll preparation", desc: "HR rebuilds data every month-end." },
-              { icon: "🎓", title: "Training proof", desc: "Mandatory certifications tracked outside one system." },
+              { icon: "🏢", title: "Multi-branch coordination", desc: "25 branches — no single view of headcount or coverage." },
+              { icon: "📋", title: "Manual time capture", desc: "Excel and tracking books for field attendance." },
+              { icon: "💬", title: "Informal channels", desc: "WhatsApp for speed — weak audit trail for hiring and IDs." },
+              { icon: "📊", title: "Payroll & client reporting", desc: "Month-end rebuilds; hard to prove SLA staffing levels." },
             ].map((item) => (
               <div key={item.title} className="flex gap-5 border border-foreground/15 p-5">
                 <span className="text-[30px] shrink-0">{item.icon}</span>
@@ -330,8 +334,8 @@ export const slides: SlideData[] = [
             },
             {
               title: "Field disconnection",
-              impact: "100 employees, one HR team",
-              desc: "HR becomes middleware for every clock-in and document.",
+              impact: `${d.professionalsNetwork} field · one HR stack`,
+              desc: "HQ HR becomes middleware for every branch, client site, and deployment.",
             },
           ].map((p) => (
             <div key={p.title} className="border border-white/20 p-8">
@@ -391,9 +395,9 @@ export const slides: SlideData[] = [
             <div className="border border-white/15 p-6">
               <p className="text-[18px] opacity-80 uppercase tracking-widest mb-4">This still excludes...</p>
               {[
-                "Payroll correction cycles",
-                "Client service risk from understaffing",
-                "Management time in firefighting",
+                "Payroll correction cycles across branches",
+                "Client SLA risk when coverage data is late",
+                "Lost margin on same-day / 7-day service promises",
               ].map((c) => (
                 <p key={c} className="text-[19px] opacity-65 flex items-start gap-3 mb-2">
                   <AlertTriangle size={18} className="opacity-80 shrink-0 mt-1" /> {c}
@@ -447,9 +451,9 @@ export const slides: SlideData[] = [
         <div className="grid grid-cols-2 gap-12">
           <div className="space-y-4">
             {[
-              { label: "Mobile clocking", desc: "Field teams capture time without HR in the middle." },
-              { label: "Leave & approvals", desc: "Managers see coverage before approving absence." },
-              { label: "Hiring pipeline", desc: "Candidates tracked; WhatsApp where it still helps." },
+              { label: "Mobile clocking", desc: "Field and branch teams clock in — HR sees live coverage by site." },
+              { label: "Leave & approvals", desc: "Branch managers approve with client coverage in view." },
+              { label: "Hiring at scale", desc: "Pipeline for steady hiring across cleaning, security, and technical roles." },
             ].map((f) => (
               <div key={f.label} className="flex items-start gap-4 border border-foreground/20 bg-background p-6">
                 <Check size={24} className="text-foreground shrink-0 mt-1" />
@@ -535,17 +539,17 @@ export const slides: SlideData[] = [
     content: (
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>How it fits</SectionLabel>
-        <SlideTitle>Your compliance stays. Factorial owns people data.</SlideTitle>
+        <SlideTitle>Your FM operations stay. HR gets a system of record.</SlideTitle>
         <p className="text-[24px] opacity-75 leading-[1.7] max-w-[1100px] mt-4 mb-10">
-          You already file statutory obligations. Factorial becomes the{" "}
-          <strong className="opacity-100">system of record</strong> for time, documents, and hiring — exporting
-          payroll-ready data to Finance without rebuilding from books each month.
+          Client delivery, SLAs, and branch P&L stay in your operating model. Factorial becomes the{" "}
+          <strong className="opacity-100">HR backbone</strong> for time, documents, hiring, and training proof —
+          aligned with how you already run insured, certified specialists nationwide.
         </p>
         <div className="grid grid-cols-3 gap-8">
           {[
-            { title: "Time → Payroll", desc: "Approved hours and leave flow to month-end preparation." },
-            { title: "Documents", desc: "Contracts and IDs stored — not lost in chat threads." },
-            { title: "Statutory", desc: "Audit-friendly records alongside your filing discipline." },
+            { title: "Branch → HQ visibility", desc: "Headcount and attendance across all 25 branches in one place." },
+            { title: "Time → Payroll", desc: "Approved hours and leave flow to month-end without rebuilding books." },
+            { title: "SLA-ready reporting", desc: "Prove staffing and compliance to clients — not just internal files." },
           ].map((item) => (
             <div key={item.title} className="border border-white/20 p-8">
               <h4 className="text-[24px] font-medium mb-3">{item.title}</h4>
@@ -578,28 +582,28 @@ export const slides: SlideData[] = [
               With Factorial
             </div>
             {[
+              { c: "Multi-branch HR view", s: "Per-branch spreadsheets", f: "Nationwide dashboards" },
               { c: "Time capture", s: "Excel + books", f: "Mobile / terminal" },
-              { c: "Leave approvals", s: "Email / chat", f: "Calendar-aware" },
-              { c: "Hiring", s: "Ad hoc", f: "Structured pipeline" },
-              { c: "Training proof", s: "Files scattered", f: "Tracked + expiry alerts" },
+              { c: "Client SLA proof", s: "Manual headcount guesses", f: "Live deployment data" },
+              { c: "Hiring", s: "Ad hoc / WhatsApp", f: "Structured pipeline" },
+              { c: "Training & certs", s: "Files scattered", f: "Tracked + expiry alerts" },
               { c: "Payroll prep", s: "Manual rebuild", f: "Export ready" },
-              { c: "Manager visibility", s: "None", f: "Team dashboards" },
-              { c: "Scale", s: "Linear HR effort", f: "Same HR, more throughput" },
-            ].map((row, i) => (
+              { c: "Scale", s: "HR effort per new branch", f: "Repeatable playbooks" },
+            ].map((row, i, arr) => (
               <Fragment key={row.c}>
                 <div
-                  className={`px-10 py-5 flex items-center text-[20px] ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                  className={`px-10 py-5 flex items-center text-[20px] ${i < arr.length - 1 ? "border-b border-foreground/10" : ""}`}
                 >
                   {row.c}
                 </div>
                 <div
-                  className={`px-10 py-5 flex items-center justify-center gap-3 opacity-70 ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                  className={`px-10 py-5 flex items-center justify-center gap-3 opacity-70 ${i < arr.length - 1 ? "border-b border-foreground/10" : ""}`}
                 >
                   <X size={20} className="opacity-60 shrink-0" />
                   <span className="text-[20px]">{row.s}</span>
                 </div>
                 <div
-                  className={`px-10 py-5 flex items-center justify-center gap-3 ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                  className={`px-10 py-5 flex items-center justify-center gap-3 ${i < arr.length - 1 ? "border-b border-foreground/10" : ""}`}
                 >
                   <Check size={20} className="opacity-80 shrink-0" />
                   <span className="text-[20px]">{row.f}</span>
@@ -672,7 +676,7 @@ export const slides: SlideData[] = [
     content: (
       <div className="flex flex-col justify-center items-center h-full px-[120px] text-center">
         <SectionLabel>See it live</SectionLabel>
-        <SlideTitle>Imagine your HR operating this way</SlideTitle>
+        <SlideTitle>Scale FM across Kenya — with HR that keeps up</SlideTitle>
         <div className="w-[960px] h-[540px] mt-8">
           <iframe
             width="960"

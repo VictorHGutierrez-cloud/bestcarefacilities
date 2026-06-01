@@ -1,10 +1,25 @@
 /**
- * Best Care Facilities — proposal numbers (single source of truth).
+ * Bestcare Facilities Management — proposal numbers & company profile.
+ * Company facts sourced from public positioning (aboutbestcare / bestcareservices.co.ke).
  */
 
 export const DEFAULT_VALUES = {
-  empresa: "Best Care Facilities",
-  legalName: "Best Care Facility Services",
+  empresa: "Bestcare Facilities Management",
+  legalName: "Bestcare Facilities Management",
+  tagline: "Integrated. Facility. Management.",
+  location: "Nairobi & Kenya",
+  headquarters: "Mpaka Plaza, Westlands, Nairobi",
+
+  /** Company scale (public profile) */
+  yearsExperience: "15+",
+  monthlyClients: "1,500+",
+  professionalsNetwork: "2,000+",
+  professionalsCount: 2000,
+  branches: 25,
+  googleRating: "4.8",
+  reviewCount: 113,
+
+  /** Factorial proposal scope (discovery session) */
   partner: "Talent Grid Africa",
   totalColaboradores: 100,
   custoColaboradorMes_USD: 7,
@@ -16,12 +31,20 @@ export const DEFAULT_VALUES = {
   custoHoraRH_USD: 15,
   custoManualMensal_USD: 720,
   custoManualAnual_USD: 8640,
+
   vendedor: "Victor Gutierrez",
   cargoVendedor: "Business Development · Factorial",
   emailVendedor: "victor.gutierrez@factorial.co",
+
   demoUrl:
     "https://app.eu2.demo.factorial.dev/dashboard?switchToCompanyId=125471&redirect_uri=https://api.eu2.demo.factorial.dev/users/sign_in",
   demoEmail: "hellen@demo2e774c9b.com",
   demoPassword: "Papapapa333!",
   closingVideoId: "9mUIcLa2te8",
+
+  servicePillars: ["Hard FM", "Soft FM", "Integrated FM"] as const,
+  coreServices:
+    "professional cleaning, pest control, appliance repair, security, HVAC, electrical, plumbing, and building maintenance",
+  sectorsServed:
+    "residential, offices, hospitality, healthcare, retail, education, and industrial sites",
 } as const;
