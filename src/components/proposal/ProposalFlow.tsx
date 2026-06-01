@@ -83,6 +83,13 @@ export default function ProposalFlow() {
             </>
           ) : null}
 
+          {section.closing ? (
+            <>
+              <Divider light={section.dividerLight} />
+              <p className={`max-w-[55ch] font-medium ${bodyCls}`}>{section.closing}</p>
+            </>
+          ) : null}
+
           {section.bullets && section.bullets.length > 0 ? (
             <>
               <Divider light={section.dividerLight} />
@@ -94,7 +101,7 @@ export default function ProposalFlow() {
             </>
           ) : null}
 
-          {section.id === "executive-summary" ? (
+          {section.id === "executive-decision-summary" ? (
             <div className="mt-4 flex flex-wrap items-center gap-6 border-t border-white/30 pt-6">
               <div className="flex h-12 w-12 items-center justify-center border border-white/40 text-xl font-light">
                 F
