@@ -50,7 +50,7 @@ export const slides: SlideData[] = [
   {
     id: "cover",
     title: "Welcome",
-    summary: "Partnership proposal — Bestcare FM Kenya",
+    summary: "~100 employees · bridge the gap",
     icon: <FileText size={24} />,
     gradient: "from-[hsl(347,100%,20%)] to-[hsl(347,80%,10%)]",
     bg: "dark",
@@ -58,7 +58,11 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>Partnership Proposal</SectionLabel>
         <h1 className="text-[96px] font-light leading-[1.1] mb-8 max-w-[1500px]">{d.empresa}</h1>
-        <p className="opacity-80 font-light mb-6 text-5xl">{d.tagline}</p>
+        <p className="opacity-80 font-light mb-8 text-5xl">{d.tagline}</p>
+        <blockquote className="border-l-4 border-white/40 pl-8 mb-8 max-w-[1200px]">
+          <p className="text-[28px] font-light italic opacity-90 leading-relaxed">&ldquo;{d.clientQuote}&rdquo;</p>
+          <footer className="text-[20px] opacity-65 mt-4 not-italic">— {d.clientQuoteAttribution}</footer>
+        </blockquote>
         <p className="opacity-60 font-light text-3xl max-w-[1300px]">
           {d.location} — hard & soft FM at scale. One HR operating model for{" "}
           {d.totalColaboradores}+ people running the business behind {d.professionalsNetwork} field specialists.
@@ -81,7 +85,7 @@ export const slides: SlideData[] = [
   {
     id: "timeline",
     title: "Bestcare journey",
-    summary: "15+ years · 25 branches · integrated FM across Kenya",
+    summary: "15+ years · fumigation & landscaping · SLA-grade HR",
     icon: <BarChart3 size={24} />,
     gradient: "from-[hsl(347,70%,18%)] to-[hsl(200,40%,12%)]",
     bg: "dark",
@@ -103,7 +107,7 @@ export const slides: SlideData[] = [
           ))}
         </div>
         <p className="text-[24px] opacity-75 leading-[1.8] mt-12 max-w-[1200px]">
-          You are Kenya&apos;s trusted integrated FM partner — {d.coreServices} across{" "}
+          You are Kenya&apos;s trusted integrated FM partner — {d.servicesNamedInCall} across{" "}
           {d.sectorsServed}. Rated <strong className="opacity-100">{d.googleRating}★</strong> (
           {d.reviewCount}+ reviews). The next chapter is giving HR the same reliability you promise clients:{" "}
           <strong className="opacity-100">SLA-grade workforce data</strong>, not spreadsheets.
@@ -115,14 +119,14 @@ export const slides: SlideData[] = [
   {
     id: "next-scale",
     title: "The moment now",
-    summary: "Bridge the gap — from Excel to controlled operations",
+    summary: "Bridge the gap — Excel to one system",
     icon: <Zap size={24} />,
     gradient: "from-[hsl(160,60%,15%)] to-[hsl(200,50%,10%)]",
     bg: "dark",
     content: (
       <div className="flex flex-col justify-center h-full px-[120px]">
-        <SectionLabel>The moment is now</SectionLabel>
-        <SlideTitle>You outgrew manual HR. Imagine with structure.</SlideTitle>
+        <SectionLabel>Bridge the gap</SectionLabel>
+        <SlideTitle>Manual HR worked — until scale demanded more.</SlideTitle>
         <div className="grid grid-cols-2 gap-16 mt-6">
           <div>
             <p className="text-[24px] opacity-75 leading-[1.8] mb-8">
@@ -154,7 +158,7 @@ export const slides: SlideData[] = [
   {
     id: "context-overview",
     title: "Current scenario",
-    summary: "25 branches · 2,000+ field pros · HR on manual rails",
+    summary: "Compliance works · process doesn't scale",
     icon: <Eye size={24} />,
     gradient: "from-[hsl(347,60%,25%)] to-[hsl(347,50%,12%)]",
     bg: "light",
@@ -170,9 +174,14 @@ export const slides: SlideData[] = [
               govern a <strong className="opacity-100">{d.professionalsNetwork}-person</strong> field network across{" "}
               {d.sectorsServed}.
             </p>
+            <p className="text-[26px] opacity-70 leading-[1.7] mb-8">
+              You already file statutory obligations and protect your compliance reputation. The opportunity is
+              connecting time, payroll inputs, and proof{" "}
+              <strong className="opacity-100">without rebuilding Excel every month-end</strong>.
+            </p>
             <p className="text-[26px] opacity-70 leading-[1.7]">
               Clients expect same-day response and SLA discipline. The team delivers that on site —{" "}
-              <strong className="opacity-100">HR tooling has not kept pace</strong>.
+              <strong className="opacity-100">HR tooling has not kept pace</strong> across {d.branches} branches.
             </p>
           </div>
           <div className="space-y-5">
@@ -199,7 +208,7 @@ export const slides: SlideData[] = [
   {
     id: "context-tools",
     title: "Current tools",
-    summary: "Excel, manual books, WhatsApp — where each breaks",
+    summary: "Excel, books, WhatsApp — where each breaks",
     icon: <AlertTriangle size={24} />,
     gradient: "from-[hsl(37,80%,25%)] to-[hsl(37,60%,12%)]",
     bg: "neutral",
@@ -255,7 +264,7 @@ export const slides: SlideData[] = [
   {
     id: "context-impact",
     title: "Operational impact",
-    summary: "Time lost, risk accumulated, growth constrained",
+    summary: "Time, risk, growth — every month",
     icon: <BarChart3 size={24} />,
     gradient: "from-[hsl(184,80%,18%)] to-[hsl(184,60%,8%)]",
     bg: "dark",
@@ -302,14 +311,14 @@ export const slides: SlideData[] = [
   {
     id: "problems",
     title: "Pain points",
-    summary: "Five pains that should not exist at your scale",
+    summary: "Five pains at your scale",
     icon: <X size={24} />,
     gradient: "from-[hsl(0,70%,25%)] to-[hsl(0,50%,12%)]",
     bg: "neutral",
     content: (
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>What we identified</SectionLabel>
-        <SlideTitle>Five pains holding operations back</SlideTitle>
+        <SlideTitle>Five pains at your scale</SlideTitle>
         <div className="grid grid-cols-3 gap-6 mt-4">
           {[
             {
@@ -325,7 +334,7 @@ export const slides: SlideData[] = [
             {
               title: "Compliance friction",
               impact: "Audit trail gaps",
-              desc: "Statutory and client training proof scattered across files.",
+              desc: "You file statutory obligations — proof and training records still scatter across files.",
             },
             {
               title: "Informal hiring",
@@ -355,7 +364,7 @@ export const slides: SlideData[] = [
   {
     id: "cost-analysis",
     title: "Cost of standing still",
-    summary: "Manual HR cost vs Factorial investment",
+    summary: "$700/mo · pricing discussed on call",
     icon: <BarChart3 size={24} />,
     gradient: "from-[hsl(347,90%,22%)] to-[hsl(0,70%,15%)]",
     bg: "dark",
@@ -406,10 +415,17 @@ export const slides: SlideData[] = [
             </div>
           </div>
         </div>
-        <div className="mt-8 border border-white/15 p-5 text-center">
+        <div className="mt-8 border border-white/15 p-5 text-center space-y-2">
           <p className="text-[22px] opacity-70 font-light">
-            Factorial: <strong className="opacity-100">{formatUSD(d.mensalFactorial_USD)}/month</strong> — less than
-            direct manual labor, before risk removed.
+            Discussed on your discovery call:{" "}
+            <strong className="opacity-100">
+              {formatUSD(d.custoColaboradorMes_USD)}/employee · {d.totalColaboradores} seats ={" "}
+              {formatUSD(d.mensalFactorial_USD)}/month
+            </strong>
+          </p>
+          <p className="text-[18px] opacity-60">
+            One-time onboarding {formatUSD(d.implantacaoFactorial_USD)} · subscription starts after{" "}
+            {d.onboardingDias} days
           </p>
         </div>
       </div>
@@ -419,7 +435,7 @@ export const slides: SlideData[] = [
   {
     id: "solution",
     title: "Solution",
-    summary: "Each pain has a concrete answer — demo included",
+    summary: "Demo ready · map pains to modules",
     icon: <Zap size={24} />,
     gradient: "from-[hsl(184,90%,20%)] to-[hsl(184,70%,10%)]",
     bg: "light",
@@ -480,7 +496,7 @@ export const slides: SlideData[] = [
   {
     id: "factorial-value",
     title: "Why Factorial",
-    summary: "Platform breadth, performance, cost control, decisions",
+    summary: "One platform · four proof points",
     icon: <Rocket size={24} />,
     gradient: "from-[hsl(347,70%,18%)] to-[hsl(347,50%,10%)]",
     bg: "dark",
@@ -515,7 +531,7 @@ export const slides: SlideData[] = [
   {
     id: "reports",
     title: "Visibility",
-    summary: "Real-time workforce intelligence",
+    summary: "Live reports · click to explore",
     icon: <BarChart3 size={24} />,
     gradient: "from-[hsl(184,40%,95%)] to-[hsl(347,30%,92%)]",
     bg: "light",
@@ -532,7 +548,7 @@ export const slides: SlideData[] = [
   {
     id: "integration",
     title: "Integration",
-    summary: "Compliance workflow stays; Factorial owns people data",
+    summary: "Projects per client · HR backbone",
     icon: <Link2 size={24} />,
     gradient: "from-[hsl(37,70%,22%)] to-[hsl(37,50%,10%)]",
     bg: "neutral",
@@ -545,10 +561,11 @@ export const slides: SlideData[] = [
           <strong className="opacity-100">HR backbone</strong> for time, documents, hiring, and training proof —
           aligned with how you already run insured, certified specialists nationwide.
         </p>
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           {[
             { title: "Branch → HQ visibility", desc: "Headcount and attendance across all 25 branches in one place." },
             { title: "Time → Payroll", desc: "Approved hours and leave flow to month-end without rebuilding books." },
+            { title: "Projects per client site", desc: "Track hours and spend by client deployment — visibility for FM margins." },
             { title: "SLA-ready reporting", desc: "Prove staffing and compliance to clients — not just internal files." },
           ].map((item) => (
             <div key={item.title} className="border border-white/20 p-8">
@@ -564,7 +581,7 @@ export const slides: SlideData[] = [
   {
     id: "comparison",
     title: "Comparison",
-    summary: "Before vs with Factorial",
+    summary: "Before vs after · point by point",
     icon: <Check size={24} />,
     gradient: "from-[hsl(160,50%,20%)] to-[hsl(160,40%,8%)]",
     bg: "light",
@@ -619,7 +636,7 @@ export const slides: SlideData[] = [
   {
     id: "tech-architecture",
     title: "Security",
-    summary: "AWS/Azure, SOC 2, GDPR — for management review",
+    summary: "AWS/Azure · SOC 2 · GDPR · NDA",
     icon: <Cloud size={24} />,
     gradient: "from-[hsl(210,50%,18%)] to-[hsl(210,40%,8%)]",
     bg: "dark",
@@ -669,7 +686,7 @@ export const slides: SlideData[] = [
   {
     id: "video",
     title: "The Future",
-    summary: "See Factorial in action",
+    summary: "Scale Best Care · next steps & pricing",
     icon: <Video size={24} />,
     gradient: "from-[hsl(347,100%,25%)] to-[hsl(347,80%,12%)]",
     bg: "dark",
@@ -677,7 +694,7 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center items-center h-full px-[120px] text-center">
         <SectionLabel>See it live</SectionLabel>
         <SlideTitle>Scale Best Care — with HR that keeps up</SlideTitle>
-        <div className="w-[960px] h-[540px] mt-8">
+        <div className="w-[960px] h-[540px] mt-6">
           <iframe
             width="960"
             height="540"
@@ -688,6 +705,18 @@ export const slides: SlideData[] = [
             allowFullScreen
             className="w-full h-full border-2 border-white/20"
           />
+        </div>
+        <div className="mt-10 max-w-[960px] w-full text-left border border-white/20 p-8">
+          <p className="text-[20px] uppercase tracking-[0.2em] opacity-70 mb-5 font-bold">Next steps</p>
+          <ol className="space-y-3 text-[22px] opacity-85 font-light list-decimal list-inside">
+            <li>Explore the demo environment (credentials on the Solution slide)</li>
+            <li>Confirm modules with HR &amp; Operations — ~{d.totalColaboradores} seats with {d.partner}</li>
+            <li>
+              Onboarding in {d.onboardingDias} days ·{" "}
+              <strong className="opacity-100">{formatUSD(d.mensalFactorial_USD)}/month</strong> + one-time onboarding{" "}
+              <strong className="opacity-100">{formatUSD(d.implantacaoFactorial_USD)}</strong>
+            </li>
+          </ol>
         </div>
       </div>
     ),

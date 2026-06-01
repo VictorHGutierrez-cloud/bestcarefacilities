@@ -19,6 +19,13 @@ export const DEFAULT_VALUES = {
   googleRating: "4.8",
   reviewCount: 113,
 
+  /** Discovery call — Florence (HR) & team */
+  clientQuote:
+    "We're growing — we need a functional, efficient system. Factorial can bridge this gap.",
+  clientQuoteAttribution: "Florence — HR, Best Care",
+  servicesNamedInCall:
+    "cleaning, fumigation, landscaping, pest control, security, HVAC, electrical, plumbing, and building maintenance",
+
   /** Factorial proposal scope (discovery session) */
   partner: "Talent Grid Africa",
   totalColaboradores: 100,
@@ -44,7 +51,7 @@ export const DEFAULT_VALUES = {
 
   servicePillars: ["Hard FM", "Soft FM", "Integrated FM"] as const,
   coreServices:
-    "professional cleaning, pest control, appliance repair, security, HVAC, electrical, plumbing, and building maintenance",
+    "professional cleaning, fumigation, landscaping, pest control, appliance repair, security, HVAC, electrical, plumbing, and building maintenance",
   sectorsServed:
     "residential, offices, hospitality, healthcare, retail, education, and industrial sites",
 } as const;
