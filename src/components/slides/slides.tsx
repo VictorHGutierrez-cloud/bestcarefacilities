@@ -9,7 +9,6 @@ import {
   Link2,
   Rocket,
   Shield,
-  Users,
   Video,
   X,
   Zap,
@@ -664,72 +663,8 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "investment",
-    title: "Investment",
-    summary: "USD 700/mo + onboarding — operational comparison",
-    icon: <Rocket size={24} />,
-    gradient: "from-[hsl(347,100%,25%)] to-[hsl(347,80%,12%)]",
-    bg: "neutral",
-    content: (
-      <div className="flex flex-col justify-center h-full px-[120px]">
-        <SectionLabel>Investment</SectionLabel>
-        <SlideTitle>Operational comparison — not a line item</SlideTitle>
-        <div className="grid grid-cols-2 gap-16 mt-8">
-          <div className="border border-white/20 p-10">
-            <p className="text-[18px] opacity-70 uppercase tracking-widest mb-2">Monthly</p>
-            <p className="text-[64px] font-light leading-none">{formatUSD(d.mensalFactorial_USD)}</p>
-            <p className="text-[20px] opacity-70 mt-3">
-              ~{formatUSD(d.custoColaboradorMes_USD)} × {d.totalColaboradores} employees
-            </p>
-          </div>
-          <div className="border border-white/20 p-10">
-            <p className="text-[18px] opacity-70 uppercase tracking-widest mb-2">Implementation (one-time)</p>
-            <p className="text-[64px] font-light leading-none">{formatUSD(d.implantacaoFactorial_USD)}</p>
-            <p className="text-[20px] opacity-70 mt-3">Before subscription · {d.onboardingDias} days go-live</p>
-          </div>
-        </div>
-        <p className="text-[26px] opacity-80 font-light mt-10 max-w-[1200px]">
-          Continuing manual HR for {d.totalColaboradores} field employees costs more in rework and risk each month
-          than this investment.
-        </p>
-      </div>
-    ),
-  },
-
-  {
-    id: "decision-path",
-    title: "Decision path",
-    summary: "Three steps to go-live",
-    icon: <Users size={24} />,
-    gradient: "from-[hsl(347,100%,20%)] to-[hsl(347,80%,10%)]",
-    bg: "dark",
-    content: (
-      <div className="flex flex-col justify-center h-full px-[120px]">
-        <SectionLabel>Next</SectionLabel>
-        <SlideTitle>Three steps to move forward</SlideTitle>
-        <div className="grid grid-cols-3 gap-10 mt-12">
-          {[
-            { step: "1", title: "Confirm scope", desc: "HR + Operations align phase-one modules and sites." },
-            { step: "2", title: "Approve terms", desc: "Management signs commercial alignment." },
-            { step: "3", title: "Start onboarding", desc: `${d.partner} + Factorial kick off ${d.onboardingDias}-day rollout.` },
-          ].map((item) => (
-            <div key={item.step} className="border border-white/25 p-10 text-center">
-              <p className="text-[48px] font-light mb-4">{item.step}</p>
-              <h4 className="text-[28px] font-medium mb-3">{item.title}</h4>
-              <p className="text-[20px] opacity-70">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-[24px] opacity-70 mt-12 text-center max-w-[1000px] mx-auto">
-          Staying on spreadsheets requires more justification than standardizing now.
-        </p>
-      </div>
-    ),
-  },
-
-  {
     id: "video",
-    title: "Closing",
+    title: "The Future",
     summary: "See Factorial in action",
     icon: <Video size={24} />,
     gradient: "from-[hsl(347,100%,25%)] to-[hsl(347,80%,12%)]",
