@@ -13,12 +13,6 @@ const Landing = () => {
       <section className="relative w-full h-[min(48vh,420px)] min-h-[260px] shrink-0 overflow-hidden border-b border-border/60">
         <ParticleTextEffect words={BEST_CARE_PARTICLE_WORDS} theme="light" className="pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center pb-6 px-4 text-center pointer-events-none">
-          <p className="text-primary text-xs md:text-sm tracking-[0.35em] uppercase font-bold">Factorial HR</p>
-          <p className="text-muted-foreground text-sm mt-2 max-w-lg">
-            Partnership proposal for {d.empresa}
-          </p>
-        </div>
       </section>
 
       {/* CTA */}
@@ -45,11 +39,6 @@ const Landing = () => {
             ]}
           />
         </div>
-
-        <p className="text-muted-foreground text-sm mt-6 max-w-xl">
-          Words above rotate automatically in Factorial colors — same spirit as the Factorial brand experience,
-          tailored for Best Care.
-        </p>
       </div>
     </div>
   );
