@@ -424,13 +424,20 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>The answer</SectionLabel>
         <SlideTitle>Every pain maps to a concrete change</SlideTitle>
-        <div className="border-2 border-foreground/25 bg-foreground/[0.06] p-6 mb-10 flex items-center justify-between">
+        <div className="border-2 border-foreground/25 bg-foreground/[0.06] p-6 mb-10 flex items-center justify-between gap-8">
           <div>
-            <p className="text-[22px] font-medium opacity-90 mb-1">Explore Factorial in demo</p>
-            <p className="text-[18px] opacity-80">Request demo access from your Factorial contact</p>
+            <p className="text-[22px] font-medium text-foreground mb-2">
+              Your dedicated demo environment is ready
+            </p>
+            <p className="text-[18px] text-foreground/85 mb-1">
+              Email: <span className="font-mono">{d.demoEmail}</span>
+            </p>
+            <p className="text-[18px] text-foreground/85">
+              Password: <span className="font-mono">{d.demoPassword}</span>
+            </p>
           </div>
           <a
-            href="https://app.eu2.demo.factorial.dev/"
+            href={d.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 bg-foreground text-background px-8 py-4 text-[20px] font-medium hover:opacity-90 transition-opacity"
@@ -735,8 +742,8 @@ export const slides: SlideData[] = [
           <iframe
             width="960"
             height="540"
-            src="https://www.youtube.com/embed/6sUn2w1hRv0?start=26"
-            title="Factorial overview"
+            src={`https://www.youtube.com/embed/${d.closingVideoId}`}
+            title="Factorial — product overview (English)"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

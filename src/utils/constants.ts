@@ -19,4 +19,9 @@ export const DEFAULT_VALUES = {
   vendedor: "Victor Gutierrez",
   cargoVendedor: "Business Development · Factorial",
   emailVendedor: "victor.gutierrez@factorial.co",
+  demoUrl:
+    "https://app.eu2.demo.factorial.dev/dashboard?switchToCompanyId=125471&redirect_uri=https://api.eu2.demo.factorial.dev/users/sign_in",
+  demoEmail: "hellen@demo2e774c9b.com",
+  demoPassword: "Papapapa333!",
+  closingVideoId: "9mUIcLa2te8",
 } as const;
