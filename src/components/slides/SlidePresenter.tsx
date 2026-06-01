@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Grid3X3, Home, Maximize, Minimize } from "lucide-react";
-import { ProposalPageShell } from "@/components/layout/ProposalPageShell";
+import { ChevronLeft, ChevronRight, Home, Maximize, Minimize, PanelLeft } from "lucide-react";
 import SlideLayout from "./SlideLayout";
 import { SlideOverviewGrid } from "./SlideOverviewGrid";
+import { SlideNavStrip } from "./SlideNavStrip";
 import { slides } from "./slides";
 import { cn } from "@/lib/utils";
+import { DEFAULT_VALUES as d } from "@/utils/constants";
 
 const bgClasses = {
   dark: "bg-primary text-primary-foreground",
@@ -14,40 +15,30 @@ const bgClasses = {
   light: "bg-background text-foreground",
 };
 
-function readInitialGrid(location: ReturnType<typeof useLocation>): boolean {
-  const state = location.state as { openGrid?: boolean } | null;
-  if (state?.openGrid === true) return true;
-  if (state?.openGrid === false) return false;
-  return new URLSearchParams(location.search).get("view") !== "slide";
-}
-
 const SlidePresenter = () => {
-  const location = useLocation();
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showGrid, setShowGrid] = useState(() => readInitialGrid(location));
+  const [navOpen, setNavOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
-
-  const openGrid = useCallback(() => setShowGrid(true), []);
 
   const goTo = useCallback((i: number) => {
     setCurrent(Math.max(0, Math.min(i, slides.length - 1)));
-    setShowGrid(false);
+    setNavOpen(false);
   }, []);
 
   const next = useCallback(() => {
-    if (showGrid) return;
     setCurrent((c) => Math.min(c + 1, slides.length - 1));
-  }, [showGrid]);
+  }, []);
 
   const prev = useCallback(() => {
-    if (showGrid) return;
     setCurrent((c) => Math.max(c - 1, 0));
-  }, [showGrid]);
+  }, []);
 
   const toggleFullscreen = useCallback(() => {
+    const el = cardRef.current ?? document.documentElement;
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
+      el.requestFullscreen?.();
     } else {
       document.exitFullscreen();
     }
@@ -63,18 +54,9 @@ const SlidePresenter = () => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "g" || e.key === "G") {
         e.preventDefault();
-        if (!showGrid) openGrid();
+        setNavOpen((v) => !v);
         return;
       }
-      if (e.key === "Escape") {
-        if (!showGrid) {
-          e.preventDefault();
-          openGrid();
-        }
-        return;
-      }
-      if (showGrid) return;
-
       if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
         next();
@@ -83,22 +65,24 @@ const SlidePresenter = () => {
         e.preventDefault();
         prev();
       }
-      if (e.key === "f" || e.key === "F" || e.key === "F5") {
+      if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         toggleFullscreen();
+      }
+      if (e.key === "Escape" && navOpen) {
+        setNavOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [showGrid, next, prev, openGrid, toggleFullscreen]);
+  }, [next, prev, navOpen, toggleFullscreen]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (showGrid) return;
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (showGrid || touchStartX.current === null) return;
+    if (touchStartX.current === null) return;
     const diff = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) next();
@@ -109,138 +93,137 @@ const SlidePresenter = () => {
 
   const slide = slides[current];
 
-  if (showGrid) {
-    return (
-      <ProposalPageShell
-        title="Proposal overview"
-        subtitle="Click a card to open that slide · Press G inside a slide to return here"
-        className="overflow-y-auto"
-      >
-        <div className="mb-6">
+  return (
+    <div className="proposal-font h-[100dvh] flex flex-col bg-[hsl(347,15%,97%)] text-foreground font-sans overflow-hidden">
+      {/* Top bar */}
+      <header className="shrink-0 flex items-center justify-between gap-3 border-b border-border bg-background px-3 md:px-5 py-3">
+        <div className="flex items-center gap-2 min-w-0">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground shrink-0"
           >
             <Home size={16} />
-            Home
+            <span className="hidden sm:inline">Home</span>
           </Link>
+          <button
+            type="button"
+            onClick={() => setNavOpen(true)}
+            className="lg:hidden inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-sm hover:bg-muted/50"
+            aria-label="Show topics"
+          >
+            <PanelLeft size={16} />
+            Topics
+          </button>
         </div>
-        <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
-      </ProposalPageShell>
-    );
-  }
+        <p className="text-sm font-medium truncate text-center flex-1 px-2">
+          {slide.title}
+        </p>
+        <span className="text-sm text-muted-foreground shrink-0 tabular-nums">
+          {current + 1} / {slides.length}
+        </span>
+      </header>
 
-  return (
-    <div className="h-screen flex flex-col bg-primary">
-      <div className="flex-1 flex min-h-0">
-        <div className="hidden xl:flex flex-col w-52 border-r border-white/10 overflow-y-auto bg-primary py-2 px-2 gap-2">
-          {slides.map((s, i) => (
+      <div className="flex flex-1 min-h-0 relative">
+        {/* Desktop sidebar — topic cards */}
+        <aside className="hidden lg:flex w-[min(100%,380px)] shrink-0 flex-col border-r border-border bg-background">
+          <div className="p-4 border-b border-border">
+            <p className="text-primary text-xs tracking-[0.25em] uppercase font-bold">Factorial HR</p>
+            <p className="text-sm font-semibold mt-1 leading-snug">{d.empresa}</p>
+          </div>
+          <div className="flex-1 overflow-y-auto p-3">
+            <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
+          </div>
+        </aside>
+
+        {/* Mobile nav drawer */}
+        {navOpen && (
+          <>
             <button
-              key={s.id}
-              onClick={() => goTo(i)}
+              type="button"
+              className="lg:hidden fixed inset-0 z-40 bg-black/40"
+              aria-label="Close topics"
+              onClick={() => setNavOpen(false)}
+            />
+            <aside className="lg:hidden fixed inset-y-0 left-0 z-50 w-[min(100%,340px)] flex flex-col bg-background border-r border-border shadow-2xl">
+              <div className="p-4 border-b border-border flex items-center justify-between">
+                <p className="font-semibold">Topics</p>
+                <button type="button" onClick={() => setNavOpen(false)} className="text-sm text-muted-foreground">
+                  Close
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-3">
+                <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
+              </div>
+            </aside>
+          </>
+        )}
+
+        {/* Main — floating slide card */}
+        <main className="flex-1 flex flex-col min-h-0 min-w-0 p-3 md:p-5">
+          <SlideNavStrip
+            slides={slides}
+            currentIndex={current}
+            onSelect={goTo}
+            className="lg:hidden mb-3"
+          />
+
+          <div
+            className="flex-1 flex items-center justify-center min-h-0"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              ref={cardRef}
               className={cn(
-                "relative aspect-video w-full overflow-hidden border transition-all shrink-0",
-                i === current ? "border-white/50 ring-1 ring-white/20" : "border-white/10 hover:border-white/25"
+                "relative w-full h-full max-w-[1200px] rounded-2xl border border-border/90 overflow-hidden",
+                "shadow-[0_20px_60px_-12px_rgba(37,8,20,0.18)] bg-background",
+                isFullscreen && "max-w-none rounded-none border-0 shadow-none h-full"
               )}
             >
-              <div className={cn("absolute inset-0 overflow-hidden opacity-25 pointer-events-none", bgClasses[s.bg])}>
-                <SlideLayout>{s.content}</SlideLayout>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
-              <div className="absolute bottom-0 left-0 right-0 px-2 py-2 text-left">
-                <span className="text-[11px] font-semibold text-white leading-tight block">
-                  {i + 1}. {s.title}
-                </span>
-                <span className="text-[9px] text-white/75 leading-snug line-clamp-2 mt-0.5">{s.summary}</span>
-              </div>
-            </button>
-          ))}
-        </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className={cn("absolute inset-0 overflow-hidden", bgClasses[slide.bg])}
+                >
+                  <SlideLayout>{slide.content}</SlideLayout>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
 
-        <div
-          className="flex-1 relative overflow-hidden"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.25 }}
-              className={cn("absolute inset-0 overflow-hidden", bgClasses[slide.bg])}
+          <footer className="shrink-0 flex items-center justify-center gap-3 pt-3 md:pt-4">
+            <button
+              type="button"
+              onClick={prev}
+              disabled={current === 0}
+              className="inline-flex items-center gap-1 rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted/40 disabled:opacity-30 transition-colors"
             >
-              <SlideLayout>{slide.content}</SlideLayout>
-            </motion.div>
-          </AnimatePresence>
-
-          <button
-            onClick={openGrid}
-            className="absolute top-4 left-4 z-20 hidden sm:inline-flex items-center gap-2 rounded-lg border border-white/25 bg-black/40 px-4 py-2 text-sm text-white backdrop-blur-sm hover:bg-black/60 transition-colors"
-          >
-            <Grid3X3 size={18} />
-            Back to Grid
-            <span className="text-white/45 text-xs ml-1">(G)</span>
-          </button>
-
-          <button
-            onClick={prev}
-            disabled={current === 0}
-            className="absolute left-0 top-0 bottom-0 w-1/4 z-10 lg:hidden disabled:hidden"
-            aria-label="Previous slide"
-          />
-          <button
-            onClick={next}
-            disabled={current === slides.length - 1}
-            className="absolute right-0 top-0 bottom-0 w-1/4 z-10 lg:hidden disabled:hidden"
-            aria-label="Next slide"
-          />
-        </div>
-      </div>
-
-      <div className="h-14 md:h-12 border-t border-white/10 bg-primary flex items-center justify-between px-3 md:px-4 gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-          <button
-            onClick={openGrid}
-            className="flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-white text-sm hover:bg-white/10 transition-colors shrink-0"
-            title="Back to grid (G)"
-          >
-            <Grid3X3 size={18} />
-            <span className="hidden sm:inline">Back to Grid</span>
-            <span className="sm:hidden">Grid</span>
-          </button>
-          <span className="text-sm text-white/40 truncate">
-            {current + 1} / {slides.length}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <button
-            onClick={prev}
-            disabled={current === 0}
-            className="p-3 text-white/60 hover:text-white disabled:opacity-20 transition-all"
-            aria-label="Previous"
-          >
-            <ChevronLeft size={28} />
-          </button>
-          <button
-            onClick={next}
-            disabled={current === slides.length - 1}
-            className="p-3 text-white/60 hover:text-white disabled:opacity-20 transition-all"
-            aria-label="Next"
-          >
-            <ChevronRight size={28} />
-          </button>
-        </div>
-
-        <button
-          onClick={toggleFullscreen}
-          className="p-2 opacity-50 hover:opacity-100 transition-opacity text-white shrink-0"
-          title="Fullscreen (F)"
-        >
-          {isFullscreen ? <Minimize size={22} /> : <Maximize size={22} />}
-        </button>
+              <ChevronLeft size={18} />
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              disabled={current === slides.length - 1}
+              className="inline-flex items-center gap-1 rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted/40 disabled:opacity-30 transition-colors"
+            >
+              Next
+              <ChevronRight size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              className="inline-flex items-center justify-center rounded-xl border border-border bg-background p-2.5 hover:bg-muted/40 transition-colors"
+              title="Fullscreen (F)"
+            >
+              {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+            </button>
+          </footer>
+        </main>
       </div>
     </div>
   );

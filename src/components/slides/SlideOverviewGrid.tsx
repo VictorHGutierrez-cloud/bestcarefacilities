@@ -11,8 +11,8 @@ export function SlideOverviewGrid({ slides, currentIndex, onSelect }: SlideOverv
   return (
     <ColorfulPillCardsGrid
       theme="light"
-      columns={2}
-      className="max-w-[1200px] mx-auto border border-border/80 bg-white shadow-sm"
+      columns={1}
+      className="border-0 bg-transparent shadow-none p-0"
       items={slides.map((slide, index) => ({
         name: `${index + 1}. ${slide.title}`,
         detail: slide.summary,
