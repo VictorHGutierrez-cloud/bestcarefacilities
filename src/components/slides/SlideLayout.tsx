@@ -66,7 +66,7 @@ const SlideLayout = ({ children, className = "" }: SlideLayoutProps) => {
     return (
       <div
         ref={containerRef}
-        className={`w-full h-full overflow-y-auto slide-content-mobile ${className}`}
+        className={`w-full h-full overflow-y-auto slide-content slide-content-mobile font-sans ${className}`}
       >
         {children}
       </div>
@@ -76,7 +76,7 @@ const SlideLayout = ({ children, className = "" }: SlideLayoutProps) => {
   return (
     <div
       ref={containerRef}
-      className={`absolute left-1/2 top-1/2 slide-content ${className}`}
+      className={`absolute left-1/2 top-1/2 slide-content font-sans ${className}`}
       style={{
         width: SLIDE_W,
         height: SLIDE_H,

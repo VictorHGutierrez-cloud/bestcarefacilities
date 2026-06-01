@@ -110,18 +110,18 @@ const SlidePresenter = () => {
 
   if (showGrid) {
     return (
-      <div className="min-h-screen bg-primary text-primary-foreground p-4 md:p-8 overflow-y-auto">
+      <div className="proposal-font min-h-screen bg-background text-foreground p-4 md:p-8 overflow-y-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 max-w-[1600px] mx-auto">
           <div>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-3 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
             >
               <Home size={16} />
               Home
             </Link>
-            <h2 className="text-xl md:text-2xl font-light">Proposal overview</h2>
-            <p className="text-sm text-white/50 mt-1">Click a card to open that slide</p>
+            <h2 className="text-xl md:text-2xl font-semibold text-foreground">Proposal overview</h2>
+            <p className="text-sm text-muted-foreground mt-1">Click a card to open that slide</p>
           </div>
         </div>
         <div className="max-w-[1600px] mx-auto">

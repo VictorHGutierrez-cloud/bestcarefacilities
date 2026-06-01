@@ -130,8 +130,8 @@ export function ColorfulPillCardsGrid({
       animate="visible"
       variants={containerVariants}
       className={cn(
-        "w-full rounded-2xl border p-5 md:p-6 text-card-foreground shadow-xl backdrop-blur-sm",
-        onDark ? "border-white/10 bg-white/[0.04]" : "border-border bg-card/80",
+        "proposal-font w-full rounded-2xl border p-5 md:p-6 font-sans text-card-foreground shadow-xl",
+        onDark ? "border-white/10 bg-white/[0.04] backdrop-blur-sm" : "border-border bg-white",
         className
       )}
     >

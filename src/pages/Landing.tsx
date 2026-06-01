@@ -5,7 +5,7 @@ const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[hsl(347,80%,6%)] flex flex-col items-center justify-center px-6 text-center">
+    <div className="proposal-font min-h-screen bg-[hsl(347,80%,6%)] flex flex-col items-center justify-center px-6 text-center font-sans">
       <p className="text-[#FF355E] text-sm tracking-[0.35em] uppercase font-bold mb-6">Factorial HR</p>
       <h1 className="text-4xl md:text-6xl font-light text-white mb-3 max-w-4xl leading-tight">
         {d.empresa}

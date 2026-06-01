@@ -10,8 +10,9 @@ interface SlideOverviewGridProps {
 export function SlideOverviewGrid({ slides, currentIndex, onSelect }: SlideOverviewGridProps) {
   return (
     <ColorfulPillCardsGrid
+      theme="light"
       columns={2}
-      className="max-w-[1200px] mx-auto border-none bg-transparent p-0 shadow-none"
+      className="max-w-[1200px] mx-auto border border-border/80 bg-white shadow-sm"
       items={slides.map((slide, index) => ({
         name: `${index + 1}. ${slide.title}`,
         detail: slide.summary,
