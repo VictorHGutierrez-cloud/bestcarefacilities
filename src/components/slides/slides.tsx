@@ -676,7 +676,7 @@ export const slides: SlideData[] = [
     content: (
       <div className="flex flex-col justify-center items-center h-full px-[120px] text-center">
         <SectionLabel>See it live</SectionLabel>
-        <SlideTitle>Scale FM across Kenya — with HR that keeps up</SlideTitle>
+        <SlideTitle>Scale Best Care — with HR that keeps up</SlideTitle>
         <div className="w-[960px] h-[540px] mt-8">
           <iframe
             width="960"
