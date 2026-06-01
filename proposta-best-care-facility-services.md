@@ -1,7 +1,7 @@
-# Cliente Sem Nome - HR Reimagined
+# Best Care Facility Services - HR Reimagined
 
 ## 01 - Capa
-- Empresa: Cliente Sem Nome
+- Empresa: Best Care Facility Services
 - Assento(s): 100
 - Desconto nonprofit: 50%
 - Responsavel comercial: Equipe Comercial
