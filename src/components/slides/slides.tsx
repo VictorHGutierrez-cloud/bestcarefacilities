@@ -1,50 +1,71 @@
-import { ReactNode } from "react";
-import { Check } from "lucide-react";
-import { CLIENT, PRICING_ROW_USD, PRICING_TOTALS_USD } from "@/utils/constants";
+import { Fragment, ReactNode } from "react";
+import {
+  AlertTriangle,
+  BarChart3,
+  Check,
+  Cloud,
+  Eye,
+  FileText,
+  Link2,
+  Rocket,
+  Shield,
+  Users,
+  Video,
+  X,
+  Zap,
+} from "lucide-react";
+import { DEFAULT_VALUES as d } from "@/utils/constants";
+import { formatUSD } from "@/utils/formatters";
 
-interface SlideData {
+export interface SlideData {
   id: string;
   title: string;
+  summary: string;
+  icon: ReactNode;
+  gradient: string;
   content: ReactNode;
   bg: "dark" | "neutral" | "light";
 }
 
 const SectionLabel = ({ children }: { children: ReactNode }) => (
-  <p className="text-[15px] tracking-[0.2em] uppercase opacity-60 mb-3">{children}</p>
+  <p className="text-[32px] tracking-[0.25em] uppercase opacity-80 mb-8 font-bold text-primary-foreground">
+    {children}
+  </p>
 );
 
 const SlideTitle = ({ children }: { children: ReactNode }) => (
-  <h2 className="text-[38px] md:text-[42px] font-light leading-[1.12] mb-4 max-w-[1200px]">{children}</h2>
+  <h2 className="text-[80px] font-light leading-[1.15] mb-10 max-w-[1400px]">{children}</h2>
 );
 
 const SlideSubtitle = ({ children }: { children: ReactNode }) => (
-  <p className="text-[17px] md:text-[19px] opacity-80 font-light leading-snug max-w-[1000px]">{children}</p>
+  <p className="text-[36px] opacity-80 font-light leading-relaxed max-w-[1200px]">{children}</p>
 );
-
-const { seatCount: SEATS, licenseDiscountPercent: DISCOUNT_PCT, organizationName: ORG } = CLIENT;
 
 export const slides: SlideData[] = [
   {
     id: "cover",
-    title: "Cover",
+    title: "Welcome",
+    summary: "Partnership proposal — Best Care Facilities",
+    icon: <FileText size={24} />,
+    gradient: "from-[hsl(347,100%,20%)] to-[hsl(347,80%,10%)]",
     bg: "dark",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Factorial proposal</SectionLabel>
-        <h1 className="text-[44px] md:text-[52px] font-light leading-[1.08] mb-4 max-w-[1200px]">{ORG}</h1>
-        <p className="text-[17px] md:text-[19px] opacity-80 font-light mb-3">
-          Starter Planning (Enterprise) plus Recruitment — one integrated HR workspace for your distributed team: Core, attendance, time off, shifts, and hiring.
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Partnership Proposal</SectionLabel>
+        <h1 className="text-[96px] font-light leading-[1.1] mb-8 max-w-[1500px]">{d.empresa}</h1>
+        <p className="opacity-80 font-light mb-6 text-6xl">Bridge the gap to one HR operating model</p>
+        <p className="opacity-60 font-light text-3xl">
+          Facility management at scale — without spreadsheets holding HR back
         </p>
-        <p className="text-[14px] md:text-[15px] opacity-60 font-light">
-          {SEATS} seats · ROW USD (monthly) · {DISCOUNT_PCT}% nonprofit discount (licenses, recruitment, implementation) · Recruitment: {PRICING_ROW_USD.recruitment.tier}
-        </p>
-        <div className="mt-8 flex items-center gap-4">
-          <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
-            <span className="text-[18px] font-light">F</span>
+        <div className="mt-16 flex items-center gap-6">
+          <div className="w-12 h-12 border border-white/30 flex items-center justify-center">
+            <span className="text-[24px] font-light">F</span>
           </div>
           <div>
-            <p className="text-[16px] opacity-70">Victor Gutierrez</p>
-            <p className="text-[13px] opacity-50">Business Development · Factorial</p>
+            <p className="opacity-70 text-4xl">{d.vendedor}</p>
+            <p className="text-[18px] opacity-75">
+              {d.cargoVendedor}
+            </p>
           </div>
         </div>
       </div>
@@ -52,41 +73,111 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "context",
-    title: "Context",
-    bg: "light",
+    id: "timeline",
+    title: "Best Care journey",
+    summary: "Facility services company growing with compliance at the core",
+    icon: <BarChart3 size={24} />,
+    gradient: "from-[hsl(347,70%,18%)] to-[hsl(200,40%,12%)]",
+    bg: "dark",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Context</SectionLabel>
-        <SlideTitle>Why Righteous Foundation is looking for a new HR system</SlideTitle>
-        <div className="grid grid-cols-2 gap-8 mt-2">
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>The journey</SectionLabel>
+        <SlideTitle>Built on service. Ready for systems.</SlideTitle>
+        <div className="grid grid-cols-4 gap-6 mt-10 border-t border-white/15 pt-10">
+          {[
+            { stat: "100+", label: "Employees today" },
+            { stat: "Multi-site", label: "Client deployments" },
+            { stat: "Compliance", label: "Statutory filing discipline" },
+            { stat: "Growing", label: "Steady hiring, low turnover" },
+          ].map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="text-[42px] font-light">{s.stat}</p>
+              <p className="text-[16px] opacity-75 mt-1">{s.label}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-[24px] opacity-75 leading-[1.8] mt-12 max-w-[1200px]">
+          Best Care delivers cleaning, fumigation, landscaping, and related services across client sites.
+          Florence and the team run a <strong className="opacity-100">compliance-oriented</strong> operation —
+          the next chapter is matching process discipline with workforce technology.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: "next-scale",
+    title: "The moment now",
+    summary: "Bridge the gap — from Excel to controlled operations",
+    icon: <Zap size={24} />,
+    gradient: "from-[hsl(160,60%,15%)] to-[hsl(200,50%,10%)]",
+    bg: "dark",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>The moment is now</SectionLabel>
+        <SlideTitle>You outgrew manual HR. Imagine with structure.</SlideTitle>
+        <div className="grid grid-cols-2 gap-16 mt-6">
           <div>
-            <p className="text-[15px] md:text-[16px] opacity-70 leading-snug mb-4">
-              Your team works <strong className="opacity-100">across the country, mostly remote</strong>. The previous HR tool had a{" "}
-              <strong className="opacity-100">weak mobile experience</strong>, and key workflows — especially{" "}
-              <strong className="opacity-100">reports and attendance</strong> — were unreliable.
+            <p className="text-[24px] opacity-75 leading-[1.8] mb-8">
+              You built a growing facility management business with{" "}
+              <strong className="opacity-100">Excel, tracking books, and determination</strong> — not with a
+              workforce platform built for distributed teams.
             </p>
-            <p className="text-[15px] md:text-[16px] opacity-70 leading-snug mb-4">
-              You moved to <strong className="opacity-100">manual processes</strong> to keep control, but that creates extra work, gaps, and errors when you need trustworthy records for managers and Finance/Payroll.
-            </p>
-            <p className="text-[15px] md:text-[16px] opacity-70 leading-snug">
-              As a <strong className="opacity-100">registered nonprofit</strong>, this proposal applies{" "}
-              <strong className="opacity-100">{DISCOUNT_PCT}%</strong> to <strong className="opacity-100">licenses</strong>,{" "}
-              <strong className="opacity-100">recruitment</strong>, and <strong className="opacity-100">implementation</strong>.
+            <p className="text-[24px] opacity-75 leading-[1.8]">
+              Factorial enters with {d.partner}: one layer for time, documents, hiring, and compliance proof —
+              so HR stops reconciling and starts governing growth.
             </p>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-6">
+            <div className="border border-white/20 p-8">
+              <p className="text-[18px] opacity-60 uppercase tracking-widest mb-3">Before</p>
+              <p className="text-[22px] opacity-80">Spreadsheets · manual books · fragmented visibility</p>
+            </div>
+            <div className="border border-white/40 bg-white/10 p-8">
+              <p className="text-[18px] opacity-60 uppercase tracking-widest mb-3">After</p>
+              <p className="text-[22px]">One system · mobile field adoption · payroll-ready data</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "context-overview",
+    title: "Current scenario",
+    summary: "~100 employees, multi-client sites, HR trapped in operations",
+    icon: <Eye size={24} />,
+    gradient: "from-[hsl(347,60%,25%)] to-[hsl(347,50%,12%)]",
+    bg: "light",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Context</SectionLabel>
+        <SlideTitle>How you operate today</SlideTitle>
+        <div className="grid grid-cols-2 gap-16 mt-4">
+          <div>
+            <p className="text-[26px] opacity-70 leading-[1.7] mb-8">
+              You manage around <strong className="opacity-100">{d.totalColaboradores} employees</strong> deployed
+              across client facilities. HR must stay compliant, keep payroll inputs accurate, and support managers
+              who cannot see coverage in real time.
+            </p>
+            <p className="text-[26px] opacity-70 leading-[1.7]">
+              The team is capable. The <strong className="opacity-100">tooling is the bottleneck</strong> — not
+              people.
+            </p>
+          </div>
+          <div className="space-y-5">
             {[
-              { icon: "📱", title: "Mobile-first", desc: "Clock in/out, request time off, sign documents, and complete tasks from the Factorial app — built for remote workers." },
-              { icon: "🧾", title: "Complete records", desc: "Timesheets, attendance dashboards, and HR exports with the fields managers and Finance need — not half-empty reports." },
-              { icon: "🌍", title: "One system", desc: "Employee data, shifts, absences, and documents in a single place instead of spreadsheets and manual fixes." },
-              { icon: "🤝", title: "Nonprofit pricing", desc: `${DISCOUNT_PCT}% discount on licenses, recruitment, and implementation for registered nonprofits.` },
+              { icon: "📋", title: "Manual time capture", desc: "Excel and tracking books for attendance." },
+              { icon: "💬", title: "Informal channels", desc: "WhatsApp for speed — risk for contracts and IDs." },
+              { icon: "📊", title: "Payroll preparation", desc: "HR rebuilds data every month-end." },
+              { icon: "🎓", title: "Training proof", desc: "Mandatory certifications tracked outside one system." },
             ].map((item) => (
-              <div key={item.title} className="flex gap-3 border border-foreground/15 p-3">
-                <span className="text-[22px] shrink-0">{item.icon}</span>
+              <div key={item.title} className="flex gap-5 border border-foreground/15 p-5">
+                <span className="text-[30px] shrink-0">{item.icon}</span>
                 <div>
-                  <h4 className="text-[14px] font-medium mb-0.5">{item.title}</h4>
-                  <p className="text-[12px] opacity-60 leading-snug">{item.desc}</p>
+                  <h4 className="text-[22px] font-medium mb-1">{item.title}</h4>
+                  <p className="text-[19px] opacity-60">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -97,29 +188,54 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "priorities",
-    title: "Priorities",
+    id: "context-tools",
+    title: "Current tools",
+    summary: "Excel, manual books, WhatsApp — where each breaks",
+    icon: <AlertTriangle size={24} />,
+    gradient: "from-[hsl(37,80%,25%)] to-[hsl(37,60%,12%)]",
     bg: "neutral",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>What you asked for</SectionLabel>
-        <SlideTitle>Start with core HR operations — then scale</SlideTitle>
-        <SlideSubtitle>
-          This proposal covers what you asked for on the call: employee records and documents, reliable remote attendance, time off, shift planning, hiring (~3–5 open roles), and clean data handoff to your payroll provider.
-        </SlideSubtitle>
-        <div className="grid grid-cols-2 gap-4 mt-5">
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Diagnosis</SectionLabel>
+        <SlideTitle>What you use today — and where it hurts</SlideTitle>
+        <div className="grid grid-cols-3 gap-10 mt-6">
           {[
-            { icon: "👤", title: "Core HR", desc: "Directory, contracts, org chart, permissions, cloud documents, and legally valid e-signatures — plus guided onboarding workflows." },
-            { icon: "⏱️", title: "Time tracking", desc: "Mobile clock-in/out with geolocation, timesheet approval, real-time attendance view, and detailed exports for control and payroll prep." },
-            { icon: "📅", title: "Shifts", desc: "Create and assign shifts (including bulk and templates), manage breaks, spot scheduling conflicts, and let employees review schedules on mobile." },
-            { icon: "🏖️", title: "Time off", desc: "Employees request leave on web or app; managers approve with policies, balances, calendars, and optional document attachments." },
-            { icon: "📣", title: "Recruitment", desc: "Career page, pipeline by hiring stage, Indeed/LinkedIn reach, email and WhatsApp with candidates, sized for about five active jobs." },
-            { icon: "💸", title: "Payroll handoff", desc: "Factorial does not process local payroll here — it centralizes time, absence, and employee change data your payroll partner can use." },
-          ].map((f) => (
-            <div key={f.title} className="border border-white/20 p-4">
-              <span className="text-[26px] block mb-2">{f.icon}</span>
-              <h3 className="text-[15px] font-medium mb-1">{f.title}</h3>
-              <p className="text-[12px] opacity-65 leading-snug">{f.desc}</p>
+            {
+              code: "XL",
+              name: "Excel",
+              role: "Time & payroll inputs",
+              pain: ["Version drift across sites", "No approval trail", "Errors found at month-end"],
+            },
+            {
+              code: "BK",
+              name: "Tracking books",
+              role: "Field attendance",
+              pain: ["Double entry into Excel", "Illegible or lost records", "No manager dashboard"],
+            },
+            {
+              code: "WA",
+              name: "WhatsApp",
+              role: "Recruitment comms",
+              pain: ["Documents outside system", "No hiring pipeline", "Hard to audit decisions"],
+            },
+          ].map((tool) => (
+            <div key={tool.name} className="border border-white/20 p-10">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 border border-white/25 flex items-center justify-center">
+                  <span className="text-[24px] font-light">{tool.code}</span>
+                </div>
+                <div>
+                  <h3 className="text-[28px] font-medium">{tool.name}</h3>
+                  <p className="text-[16px] opacity-75 uppercase tracking-widest">{tool.role}</p>
+                </div>
+              </div>
+              <div className="space-y-3 border-t border-white/15 pt-5">
+                {tool.pain.map((line) => (
+                  <p key={line} className="text-[18px] opacity-65 flex items-center gap-3">
+                    <X size={16} className="opacity-75 shrink-0" /> {line}
+                  </p>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -128,158 +244,221 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "recommended-package",
-    title: "Package",
+    id: "context-impact",
+    title: "Operational impact",
+    summary: "Time lost, risk accumulated, growth constrained",
+    icon: <BarChart3 size={24} />,
+    gradient: "from-[hsl(184,80%,18%)] to-[hsl(184,60%,8%)]",
     bg: "dark",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Recommended package</SectionLabel>
-        <SlideTitle>{PRICING_ROW_USD.bundleName} · Enterprise</SlideTitle>
-        <SlideSubtitle>
-          One monthly package for {SEATS} employees: <strong className="opacity-100">Core</strong>, <strong className="opacity-100">Time Tracking</strong>,{" "}
-          <strong className="opacity-100">Time Off</strong>, and <strong className="opacity-100">Shifts</strong> — list price{" "}
-          <strong className="opacity-100">${PRICING_ROW_USD.listPricePerSeatPerMonth}/seat/month</strong> before your nonprofit discount.
-        </SlideSubtitle>
-        <div className="grid grid-cols-2 gap-6 mt-5">
-          <div className="border border-white/20 p-5">
-            <h3 className="text-[17px] font-medium mb-3">What you get in the bundle</h3>
-            <div className="space-y-3 text-[13px] opacity-75 leading-snug">
-              <div>
-                <p className="font-medium opacity-90 mb-1">Core</p>
-                <ul className="space-y-1">
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Employee directory, contracts, org chart, teams & permissions</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Cloud documents, bulk send, legally valid e-signatures</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Onboarding/offboarding workflows with tasks and file collection</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> HR reports, custom reports, and payroll-ready employee change exports</li>
-                </ul>
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Real impact</SectionLabel>
+        <SlideTitle>What the business loses — every month</SlideTitle>
+        <div className="grid grid-cols-3 gap-10 mt-8">
+          {[
+            {
+              emoji: "⏱️",
+              title: "Time lost",
+              body: "HR and Finance spend days reconciling instead of improving workforce quality.",
+            },
+            {
+              emoji: "⚠️",
+              title: "Risk accumulated",
+              body: "Payroll corrections, coverage gaps on site, and statutory exposure grow quietly.",
+            },
+            {
+              emoji: "📈",
+              title: "Growth constrained",
+              body: "Each new client site multiplies manual steps — the model does not compound.",
+            },
+          ].map((item) => (
+            <div key={item.title} className="border border-white/20 p-10">
+              <div className="w-16 h-16 border border-white/25 flex items-center justify-center mb-6">
+                <span className="text-[32px]">{item.emoji}</span>
               </div>
-              <div>
-                <p className="font-medium opacity-90 mb-1">Time tracking & shifts</p>
-                <ul className="space-y-1">
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Clock-in/out on mobile and web, with geolocation and optional location alerts</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Timesheet approval, real-time attendance dashboard, Excel/PDF exports</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Overtime rules, bank of hours, and shift planning with conflict warnings</li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-medium opacity-90 mb-1">Time off</p>
-                <ul className="space-y-1">
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Requests and approvals on desktop and mobile, with policy-based balances</li>
-                  <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Team calendars, multi-level approvals, and document attachments when required</li>
-                </ul>
-              </div>
+              <h3 className="text-[28px] font-medium mb-3">{item.title}</h3>
+              <p className="text-[21px] opacity-70 leading-relaxed">{item.body}</p>
             </div>
-          </div>
-          <div className="border border-white/20 p-5">
-            <h3 className="text-[17px] font-medium mb-3">Recruitment add-on</h3>
-            <p className="text-[14px] opacity-75 leading-snug mb-3">
-              <strong className="opacity-100">{PRICING_ROW_USD.recruitment.tier}</strong> — applicant tracking for your typical hiring volume (~3–5 open roles).
-            </p>
-            <ul className="space-y-1.5 text-[13px] opacity-75 leading-snug mb-3">
-              <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Branded career page and customizable hiring stages</li>
-              <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Indeed and LinkedIn integration; one candidate pipeline</li>
-              <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Email and WhatsApp with applicants; notes and feedback per profile</li>
-              <li className="flex gap-2"><Check className="shrink-0 mt-0.5" size={14} /> Move hired candidates into Core onboarding (data, documents, tasks)</li>
-            </ul>
-            <p className="text-[12px] opacity-55 leading-snug border-t border-white/15 pt-3">
-              List <strong className="opacity-80">${PRICING_TOTALS_USD.recruitmentListPerMonth}/mo</strong> → nonprofit:{" "}
-              <strong className="opacity-80">${PRICING_TOTALS_USD.recruitmentDiscountedSubtotal.toFixed(2)}/mo</strong>
-            </p>
-          </div>
+          ))}
+        </div>
+        <div className="mt-12 border border-white/15 p-8 text-center">
+          <p className="text-[26px] opacity-75 font-light leading-relaxed max-w-[1200px] mx-auto">
+            None of this is inevitable. <strong className="opacity-100">The question is not if — it is when.</strong>
+          </p>
         </div>
       </div>
     ),
   },
 
   {
-    id: "mobile-remote",
-    title: "Mobile",
+    id: "problems",
+    title: "Pain points",
+    summary: "Five pains that should not exist at your scale",
+    icon: <X size={24} />,
+    gradient: "from-[hsl(0,70%,25%)] to-[hsl(0,50%,12%)]",
+    bg: "neutral",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>What we identified</SectionLabel>
+        <SlideTitle>Five pains holding operations back</SlideTitle>
+        <div className="grid grid-cols-3 gap-6 mt-4">
+          {[
+            {
+              title: "Unreliable time data",
+              impact: "~48 hrs/month HR rework", // estimativa
+              desc: "Clocking and books do not feed one payroll-ready source.",
+            },
+            {
+              title: "Manager blind spots",
+              impact: "Coverage gaps on client sites",
+              desc: "Leave and overtime approved without team context.",
+            },
+            {
+              title: "Compliance friction",
+              impact: "Audit trail gaps",
+              desc: "Statutory and client training proof scattered across files.",
+            },
+            {
+              title: "Informal hiring",
+              impact: "1–3 hires/month without pipeline",
+              desc: "Growth continues; process does not institutionalize.",
+            },
+            {
+              title: "Field disconnection",
+              impact: "100 employees, one HR team",
+              desc: "HR becomes middleware for every clock-in and document.",
+            },
+          ].map((p) => (
+            <div key={p.title} className="border border-white/20 p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <AlertTriangle size={24} className="opacity-65" />
+                <h3 className="text-[26px] font-normal">{p.title}</h3>
+              </div>
+              <p className="text-[20px] opacity-75 leading-relaxed mb-5">{p.desc}</p>
+              <p className="text-[18px] opacity-80 border-t border-white/15 pt-4">{p.impact}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "cost-analysis",
+    title: "Cost of standing still",
+    summary: "Manual HR cost vs Factorial investment",
+    icon: <BarChart3 size={24} />,
+    gradient: "from-[hsl(347,90%,22%)] to-[hsl(0,70%,15%)]",
+    bg: "dark",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Cost of standing still</SectionLabel>
+        <SlideTitle>What does not changing cost?</SlideTitle>
+        <div className="grid grid-cols-2 gap-16 mt-4">
+          <div>
+            <h3 className="text-[26px] font-medium opacity-80 mb-6">The math is simple</h3>
+            <div className="border border-white/20 p-8 space-y-4">
+              <div className="flex justify-between text-[22px]">
+                <span className="opacity-65">HR hours on manual HR / month</span>
+                <span className="font-medium">{d.horasRHManualMes} h</span>
+              </div>
+              <div className="flex justify-between text-[22px]">
+                <span className="opacity-65">Loaded cost / hour</span>
+                <span className="font-medium">{formatUSD(d.custoHoraRH_USD)}</span>
+              </div>
+              <div className="flex justify-between text-[22px] border-t border-white/15 pt-4">
+                <span className="opacity-75 font-medium">Direct labor cost / month</span>
+                <span className="font-medium text-[24px]">{formatUSD(d.custoManualMensal_USD)}</span>
+              </div>
+              <div className="flex justify-between text-[22px]">
+                <span className="opacity-75 font-medium">Annual (labor only)</span>
+                <span className="font-medium text-[24px]">{formatUSD(d.custoManualAnual_USD)}</span>
+              </div>
+            </div>
+            <p className="text-[16px] opacity-50 mt-4">// estimativa — validate with Finance</p>
+          </div>
+          <div>
+            <div className="border border-white/25 bg-white/10 p-10 text-center mb-8">
+              <p className="text-[20px] opacity-80 mb-2">Annual drag — manual model</p>
+              <p className="text-[80px] font-light leading-none">{formatUSD(d.custoManualAnual_USD)}</p>
+              <p className="text-[18px] opacity-75 mt-3">Before error, compliance, and manager time</p>
+            </div>
+            <div className="border border-white/15 p-6">
+              <p className="text-[18px] opacity-80 uppercase tracking-widest mb-4">This still excludes...</p>
+              {[
+                "Payroll correction cycles",
+                "Client service risk from understaffing",
+                "Management time in firefighting",
+              ].map((c) => (
+                <p key={c} className="text-[19px] opacity-65 flex items-start gap-3 mb-2">
+                  <AlertTriangle size={18} className="opacity-80 shrink-0 mt-1" /> {c}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 border border-white/15 p-5 text-center">
+          <p className="text-[22px] opacity-70 font-light">
+            Factorial: <strong className="opacity-100">{formatUSD(d.mensalFactorial_USD)}/month</strong> — less than
+            direct manual labor, before risk removed.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "solution",
+    title: "Solution",
+    summary: "Each pain has a concrete answer — demo included",
+    icon: <Zap size={24} />,
+    gradient: "from-[hsl(184,90%,20%)] to-[hsl(184,70%,10%)]",
     bg: "light",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Experience</SectionLabel>
-        <SlideTitle>Built for employees on their phones</SlideTitle>
-        <SlideSubtitle>
-          Remote employees use the Factorial app for daily HR: clock in/out with geolocation, request and track time off, sign documents, and complete onboarding tasks from one inbox.
-        </SlideSubtitle>
-        <div className="grid grid-cols-3 gap-4 mt-5">
-          {[
-            { title: "One login, role-based access", desc: "HR sees the full picture; managers approve what they own; employees see only their data — no extra license types." },
-            { title: "Tasks in one inbox", desc: "Signatures, time-off reviews, document uploads, and onboarding steps appear as actionable tasks on mobile." },
-            { title: "Location-aware attendance", desc: "Assign work locations per employee; optional geofencing alerts help validate remote clock-ins when you need control." },
-          ].map((x) => (
-            <div key={x.title} className="border border-foreground/15 p-4">
-              <h3 className="text-[15px] font-medium mb-1.5">{x.title}</h3>
-              <p className="text-[12px] opacity-60 leading-snug">{x.desc}</p>
-            </div>
-          ))}
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>The answer</SectionLabel>
+        <SlideTitle>Every pain maps to a concrete change</SlideTitle>
+        <div className="border-2 border-foreground/25 bg-foreground/[0.06] p-6 mb-10 flex items-center justify-between">
+          <div>
+            <p className="text-[22px] font-medium opacity-90 mb-1">Explore Factorial in demo</p>
+            <p className="text-[18px] opacity-80">Request demo access from your Factorial contact</p>
+          </div>
+          <a
+            href="https://app.eu2.demo.factorial.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 bg-foreground text-background px-8 py-4 text-[20px] font-medium hover:opacity-90 transition-opacity"
+          >
+            Open demo →
+          </a>
         </div>
-      </div>
-    ),
-  },
-
-  {
-    id: "attendance-reporting",
-    title: "Attendance",
-    bg: "neutral",
-    content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Operations</SectionLabel>
-        <SlideTitle>Attendance you can prove — reports you can export</SlideTitle>
-        <SlideSubtitle>
-          Replace unreliable sign-ins and incomplete reports with validated timesheets, live attendance visibility, and exports your Finance team can use.
-        </SlideSubtitle>
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          {[
-            { icon: "📅", title: "Shifts linked to attendance", desc: "Plan and assign shifts (templates, bulk edits, breaks), see conflicts early, and align absences with the schedule." },
-            { icon: "📥", title: "Timesheets & exports", desc: "Approve timesheets, autofill where configured, and export detailed attendance to Excel or PDF." },
-            { icon: "📊", title: "Live attendance view", desc: "See who clocked in, who is missing, work location, and breaks — in real time for managers." },
-            { icon: "⏱️", title: "Overtime & bank of hours", desc: "Configure overtime and special-hour rules; balance extra time with policies you define." },
-          ].map((f) => (
-            <div key={f.title} className="flex gap-3 border border-white/20 p-4">
-              <span className="text-[24px] shrink-0">{f.icon}</span>
-              <div>
-                <h4 className="text-[15px] font-medium mb-1">{f.title}</h4>
-                <p className="text-[12px] opacity-60 leading-snug">{f.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-  },
-
-  {
-    id: "documents-onboarding",
-    title: "Documents",
-    bg: "dark",
-    content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Compliance & onboarding</SectionLabel>
-        <SlideTitle>Documents, e-signatures, and structured onboarding</SlideTitle>
-        <SlideSubtitle>
-          Centralize HR files in the cloud, collect legally valid e-signatures, and run structured onboarding so new hires submit IDs and complete tasks without email chaos.
-        </SlideSubtitle>
-        <div className="grid grid-cols-2 gap-6 mt-5">
-          <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-16">
+          <div className="space-y-4">
             {[
-              "Employee directory, contracts, and org chart in one workspace",
-              "Send, sign, and track documents in bulk (desktop and mobile)",
-              "Guided onboarding/offboarding workflows with assigned tasks",
-              "Super-task to collect employee IDs and required files into the right folders",
-              "Custom roles and permissions — control who sees and approves what",
-            ].map((t) => (
-              <div key={t} className="flex items-start gap-2 border border-white/15 p-3">
-                <Check size={16} className="shrink-0 mt-0.5 opacity-70" />
-                <p className="text-[14px] opacity-80 leading-snug">{t}</p>
+              { label: "Mobile clocking", desc: "Field teams capture time without HR in the middle." },
+              { label: "Leave & approvals", desc: "Managers see coverage before approving absence." },
+              { label: "Hiring pipeline", desc: "Candidates tracked; WhatsApp where it still helps." },
+            ].map((f) => (
+              <div key={f.label} className="flex items-start gap-4 border border-foreground/15 p-6">
+                <Check size={24} className="opacity-60 shrink-0 mt-1" />
+                <div>
+                  <p className="text-[24px] font-medium opacity-90">{f.label}</p>
+                  <p className="text-[19px] opacity-80 mt-1">{f.desc}</p>
+                </div>
               </div>
             ))}
           </div>
-          <div className="border border-white/20 p-5">
-            <h3 className="text-[16px] font-medium mb-2">From “offer accepted” to “ready to work”</h3>
-            <p className="text-[13px] opacity-65 leading-snug">
-              After you hire in Recruitment, onboarding picks up automatically: offer and personal data collection, document signatures, and file uploads — so the new employee is ready to clock in and request time off on day one.
-            </p>
+          <div className="space-y-6">
+            {[
+              { title: "Payroll-ready month-end", desc: "Hours and leave export with approval history." },
+              { title: "Training & compliance", desc: "Mandatory certs tracked with expiry alerts." },
+              { title: "Projects per client", desc: "Hours and spend visible by deployment." },
+            ].map((g) => (
+              <div key={g.title} className="border border-foreground/15 p-8">
+                <h4 className="text-[26px] font-normal mb-2">{g.title}</h4>
+                <p className="text-[22px] opacity-60">{g.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -287,25 +466,26 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "recruitment",
-    title: "Recruitment",
+    id: "reports",
+    title: "Visibility",
+    summary: "Real-time workforce intelligence",
+    icon: <BarChart3 size={24} />,
+    gradient: "from-[hsl(184,40%,95%)] to-[hsl(347,30%,92%)]",
     bg: "light",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Talent acquisition</SectionLabel>
-        <SlideTitle>Recruitment built for your hiring rhythm</SlideTitle>
-        <SlideSubtitle>
-          Publish roles, manage candidates in one ATS, and reach people on Indeed, LinkedIn, email, or WhatsApp — sized for about five active jobs at a time.
-        </SlideSubtitle>
-        <div className="grid grid-cols-3 gap-4 mt-5">
+      <div className="flex flex-col justify-center h-full px-[120px] py-[60px]">
+        <SectionLabel>Proof</SectionLabel>
+        <SlideTitle>Decisions with data — not Excel</SlideTitle>
+        <SlideSubtitle>What leadership gains when attendance, leave, and headcount live in one place.</SlideSubtitle>
+        <div className="grid grid-cols-3 gap-6 mt-8">
           {[
-            { title: "Career page & job posts", desc: "Branded careers URL, customizable application forms, and job catalog aligned with your teams." },
-            { title: "Indeed & LinkedIn", desc: "Bring applicants into one pipeline with tags, notes, and hiring stages your managers can follow." },
-            { title: "Candidate communication", desc: "Email from Factorial, WhatsApp outreach, and hiring metrics (time-to-hire, sources, funnel)." },
-          ].map((x) => (
-            <div key={x.title} className="border border-foreground/15 p-4">
-              <h3 className="text-[15px] font-medium mb-1">{x.title}</h3>
-              <p className="text-[12px] opacity-60 leading-snug">{x.desc}</p>
+            { title: "Attendance", desc: "Who is on site, late, or missing — by team and client." },
+            { title: "Absences", desc: "Planned leave vs sick leave with evidence attached." },
+            { title: "Headcount", desc: "Active hires, onboarding status, training compliance." },
+          ].map((r) => (
+            <div key={r.title} className="border border-foreground/15 p-8">
+              <h4 className="text-[26px] font-normal mb-3">{r.title}</h4>
+              <p className="text-[20px] opacity-70">{r.desc}</p>
             </div>
           ))}
         </div>
@@ -314,33 +494,126 @@ export const slides: SlideData[] = [
   },
 
   {
-    id: "payroll",
-    title: "Payroll",
+    id: "integration",
+    title: "Integration",
+    summary: "Compliance workflow stays; Factorial owns people data",
+    icon: <Link2 size={24} />,
+    gradient: "from-[hsl(37,70%,22%)] to-[hsl(37,50%,10%)]",
     bg: "neutral",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Finance handoff</SectionLabel>
-        <SlideTitle>Factorial prepares payroll inputs — your payroll partner runs payroll</SlideTitle>
-        <SlideSubtitle>
-          If you want fully processed payslips inside the same system, Factorial is not positioned as the payroll engine in this scope. If you’re open to a best-in-class HR hub + payroll partner, Factorial fits cleanly.
-        </SlideSubtitle>
-        <div className="grid grid-cols-2 gap-6 mt-5">
-          <div className="border border-white/20 p-5">
-            <h3 className="text-[16px] font-medium mb-2">What Factorial covers</h3>
-            <ul className="text-[13px] opacity-75 space-y-1.5 leading-snug">
-              <li>• Contract and employee updates that affect payroll</li>
-              <li>• Time tracking, absences, overtime, and bank-of-hours outputs</li>
-              <li>• Guided payroll cycle collaboration and exports to compatible payroll tools</li>
-              <li>• Custom reports and employee change exports for your provider’s format</li>
-            </ul>
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>How it fits</SectionLabel>
+        <SlideTitle>Your compliance stays. Factorial owns people data.</SlideTitle>
+        <p className="text-[24px] opacity-75 leading-[1.7] max-w-[1100px] mt-4 mb-10">
+          You already file statutory obligations. Factorial becomes the{" "}
+          <strong className="opacity-100">system of record</strong> for time, documents, and hiring — exporting
+          payroll-ready data to Finance without rebuilding from books each month.
+        </p>
+        <div className="grid grid-cols-3 gap-8">
+          {[
+            { title: "Time → Payroll", desc: "Approved hours and leave flow to month-end preparation." },
+            { title: "Documents", desc: "Contracts and IDs stored — not lost in chat threads." },
+            { title: "Statutory", desc: "Audit-friendly records alongside your filing discipline." },
+          ].map((item) => (
+            <div key={item.title} className="border border-white/20 p-8">
+              <h4 className="text-[24px] font-medium mb-3">{item.title}</h4>
+              <p className="text-[20px] opacity-70">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "comparison",
+    title: "Comparison",
+    summary: "Before vs with Factorial",
+    icon: <Check size={24} />,
+    gradient: "from-[hsl(160,50%,20%)] to-[hsl(160,40%,8%)]",
+    bg: "light",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Before and after</SectionLabel>
+        <SlideTitle>What changes — point by point</SlideTitle>
+        <div className="border border-foreground/20 mt-6">
+          <div className="grid grid-cols-[1fr_1fr_1fr] text-[22px]">
+            <div className="px-10 py-6 border-b border-foreground/20 font-medium opacity-60">Criteria</div>
+            <div className="px-10 py-6 border-b border-foreground/20 font-medium opacity-60 text-center">
+              Today (manual)
+            </div>
+            <div className="px-10 py-6 border-b border-foreground/20 font-medium opacity-60 text-center">
+              With Factorial
+            </div>
+            {[
+              { c: "Time capture", s: "Excel + books", f: "Mobile / terminal" },
+              { c: "Leave approvals", s: "Email / chat", f: "Calendar-aware" },
+              { c: "Hiring", s: "Ad hoc", f: "Structured pipeline" },
+              { c: "Training proof", s: "Files scattered", f: "Tracked + expiry alerts" },
+              { c: "Payroll prep", s: "Manual rebuild", f: "Export ready" },
+              { c: "Manager visibility", s: "None", f: "Team dashboards" },
+              { c: "Scale", s: "Linear HR effort", f: "Same HR, more throughput" },
+            ].map((row, i) => (
+              <Fragment key={row.c}>
+                <div
+                  className={`px-10 py-5 flex items-center text-[20px] ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                >
+                  {row.c}
+                </div>
+                <div
+                  className={`px-10 py-5 flex items-center justify-center gap-3 opacity-70 ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                >
+                  <X size={20} className="opacity-60 shrink-0" />
+                  <span className="text-[20px]">{row.s}</span>
+                </div>
+                <div
+                  className={`px-10 py-5 flex items-center justify-center gap-3 ${i < 6 ? "border-b border-foreground/10" : ""}`}
+                >
+                  <Check size={20} className="opacity-80 shrink-0" />
+                  <span className="text-[20px]">{row.f}</span>
+                </div>
+              </Fragment>
+            ))}
           </div>
-          <div className="border border-white/20 p-5">
-            <h3 className="text-[16px] font-medium mb-2">What your payroll partner keeps</h3>
-            <ul className="text-[13px] opacity-75 space-y-1.5 leading-snug">
-              <li>• Payslip generation and statutory compliance execution</li>
-              <li>• Final bank file / local regulatory filings (as applicable)</li>
-              <li>• Authoritative accounting entries (depending on your finance stack)</li>
-            </ul>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "tech-architecture",
+    title: "Security",
+    summary: "AWS/Azure, SOC 2, GDPR — for management review",
+    icon: <Cloud size={24} />,
+    gradient: "from-[hsl(210,50%,18%)] to-[hsl(210,40%,8%)]",
+    bg: "dark",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>For IT & management</SectionLabel>
+        <SlideTitle>Security & compliance posture</SlideTitle>
+        <div className="grid grid-cols-2 gap-10 mt-6">
+          <div className="border border-white/20 p-8 space-y-4">
+            {[
+              { label: "Hosting", value: "AWS + Azure (incl. EU regions)" },
+              { label: "Availability", value: "SLA-backed infrastructure" },
+              { label: "Recovery", value: "Disaster recovery in place" },
+            ].map((r) => (
+              <div key={r.label} className="flex justify-between text-[20px]">
+                <span className="opacity-60">{r.label}</span>
+                <span className="font-medium text-right">{r.value}</span>
+              </div>
+            ))}
+          </div>
+          <div className="border border-white/20 p-8">
+            <div className="flex items-center gap-3 mb-5">
+              <Shield size={24} className="opacity-70" />
+              <h3 className="text-[26px] font-medium">Certifications</h3>
+            </div>
+            {["SOC 2 Type II", "ISO-aligned controls", "GDPR", "NDA available on request"].map((cert) => (
+              <p key={cert} className="text-[19px] opacity-70 flex items-center gap-3 mb-2">
+                <Check size={16} className="opacity-60 shrink-0" /> {cert}
+              </p>
+            ))}
           </div>
         </div>
       </div>
@@ -350,220 +623,89 @@ export const slides: SlideData[] = [
   {
     id: "investment",
     title: "Investment",
-    bg: "light",
+    summary: "USD 700/mo + onboarding — operational comparison",
+    icon: <Rocket size={24} />,
+    gradient: "from-[hsl(347,100%,25%)] to-[hsl(347,80%,12%)]",
+    bg: "neutral",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
+      <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>Investment</SectionLabel>
-        <SlideTitle>Monthly estimate (ROW USD · monthly billing)</SlideTitle>
-
-        <div className="grid grid-cols-2 gap-8 mt-2">
-          <div>
-            <h3 className="text-[17px] font-medium opacity-80 mb-3">Monthly subscription</h3>
-            <div className="border border-foreground/20 p-5 space-y-2 text-[13px]">
-              <div className="flex justify-between gap-2">
-                <span className="opacity-65">{PRICING_ROW_USD.bundleName} ({SEATS} × ${PRICING_ROW_USD.listPricePerSeatPerMonth})</span>
-                <span className="font-medium shrink-0">${PRICING_TOTALS_USD.licenseListSubtotal.toFixed(2)}/mo</span>
-              </div>
-              <div className="flex justify-between gap-2 text-emerald-700 dark:text-emerald-400">
-                <span className="opacity-80">Nonprofit discount ({DISCOUNT_PCT}%)</span>
-                <span className="font-medium shrink-0">−${(PRICING_TOTALS_USD.licenseListSubtotal - PRICING_TOTALS_USD.licenseDiscountedSubtotal).toFixed(2)}/mo</span>
-              </div>
-              <div className="flex justify-between gap-2 border-t border-foreground/15 pt-2">
-                <span className="opacity-65">Licenses after discount</span>
-                <span className="font-medium">${PRICING_TOTALS_USD.licenseDiscountedSubtotal.toFixed(2)}/mo</span>
-              </div>
-              <div className="flex justify-between gap-2">
-                <span className="opacity-65">Recruitment ({PRICING_ROW_USD.recruitment.tier}) — list</span>
-                <span className="font-medium">${PRICING_TOTALS_USD.recruitmentListPerMonth.toFixed(2)}/mo</span>
-              </div>
-              <div className="flex justify-between gap-2 text-emerald-700 dark:text-emerald-400">
-                <span className="opacity-80">Nonprofit discount ({DISCOUNT_PCT}%)</span>
-                <span className="font-medium shrink-0">−${(PRICING_TOTALS_USD.recruitmentListPerMonth - PRICING_TOTALS_USD.recruitmentDiscountedSubtotal).toFixed(2)}/mo</span>
-              </div>
-              <div className="flex justify-between gap-2 border-t border-foreground/15 pt-2">
-                <span className="opacity-65">Recruitment after discount</span>
-                <span className="font-medium">${PRICING_TOTALS_USD.recruitmentDiscountedSubtotal.toFixed(2)}/mo</span>
-              </div>
-              <p className="text-[11px] opacity-50 pt-1 leading-snug">{DISCOUNT_PCT}% nonprofit pricing on licenses and recruitment in this proposal.</p>
-            </div>
+        <SlideTitle>Operational comparison — not a line item</SlideTitle>
+        <div className="grid grid-cols-2 gap-16 mt-8">
+          <div className="border border-white/20 p-10">
+            <p className="text-[18px] opacity-70 uppercase tracking-widest mb-2">Monthly</p>
+            <p className="text-[64px] font-light leading-none">{formatUSD(d.mensalFactorial_USD)}</p>
+            <p className="text-[20px] opacity-70 mt-3">
+              ~{formatUSD(d.custoColaboradorMes_USD)} × {d.totalColaboradores} employees
+            </p>
           </div>
-
-          <div>
-            <h3 className="text-[17px] font-medium opacity-80 mb-3">Totals & implementation</h3>
-            <div className="space-y-3">
-              <div className="border-2 border-foreground/30 bg-foreground/[0.06] p-4 text-center">
-                <p className="text-[12px] opacity-55 mb-1">Estimated monthly subscription</p>
-                <p className="text-[44px] font-light leading-none">${PRICING_TOTALS_USD.monthlyTotal.toFixed(2)}</p>
-                <p className="text-[11px] opacity-45 mt-1">USD · before taxes/fees if applicable</p>
-              </div>
-
-              <div className="border border-foreground/20 p-4 text-[12px] space-y-1.5">
-                <p className="font-medium opacity-90">Implementation (one-time)</p>
-                <p className="flex justify-between gap-2">
-                  <span className="opacity-70">List (reference)</span>
-                  <span>${PRICING_TOTALS_USD.implementationListOneTime.toFixed(0)}</span>
-                </p>
-                <p className="flex justify-between gap-2 text-emerald-700 dark:text-emerald-400">
-                  <span>Nonprofit discount ({DISCOUNT_PCT}%)</span>
-                  <span>−${(PRICING_TOTALS_USD.implementationListOneTime - PRICING_TOTALS_USD.implementationOneTime).toFixed(0)}</span>
-                </p>
-                <p className="flex justify-between gap-2 border-t border-foreground/15 pt-2 font-medium">
-                  <span>Your price</span>
-                  <span>${PRICING_TOTALS_USD.implementationOneTime.toFixed(0)} USD</span>
-                </p>
-                <p className="text-[10px] opacity-45 leading-snug">Onboarding: 1 hour / week with your Specialist; full implementation within ~1.5 months. Final scope in the order form.</p>
-              </div>
-
-              <p className="text-[11px] opacity-55 px-1 leading-snug">Card or bank transfer in USD/EUR as agreed.</p>
-            </div>
+          <div className="border border-white/20 p-10">
+            <p className="text-[18px] opacity-70 uppercase tracking-widest mb-2">Implementation (one-time)</p>
+            <p className="text-[64px] font-light leading-none">{formatUSD(d.implantacaoFactorial_USD)}</p>
+            <p className="text-[20px] opacity-70 mt-3">Before subscription · {d.onboardingDias} days go-live</p>
           </div>
         </div>
+        <p className="text-[26px] opacity-80 font-light mt-10 max-w-[1200px]">
+          Continuing manual HR for {d.totalColaboradores} field employees costs more in rework and risk each month
+          than this investment.
+        </p>
       </div>
     ),
   },
 
   {
-    id: "demo",
-    title: "Demo",
+    id: "decision-path",
+    title: "Decision path",
+    summary: "Three steps to go-live",
+    icon: <Users size={24} />,
+    gradient: "from-[hsl(347,100%,20%)] to-[hsl(347,80%,10%)]",
     bg: "dark",
     content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Try it</SectionLabel>
-        <SlideTitle>Explore Factorial in a demo workspace</SlideTitle>
-
-        <div className="border-2 border-white/25 bg-white/[0.08] p-4 mb-4 flex items-center justify-between flex-wrap gap-3">
-          <div>
-            <p className="text-[15px] font-medium opacity-90 mb-1">Demo environment</p>
-            <p className="text-[12px] opacity-55 leading-snug">
-              Login: <span className="font-mono opacity-80 text-[11px]">hellen@demob25acc00.com</span> · Password:{" "}
-              <span className="font-mono opacity-80 text-[11px]">Papapapa333!</span>
-            </p>
-          </div>
-          <a
-            href="https://app.eu2.demo.factorial.dev/dashboard?switchToCompanyId=75113&redirect_uri=https://api.eu2.demo.factorial.dev/users/sign_in"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 bg-white text-black px-5 py-2.5 text-[13px] font-medium hover:opacity-90 transition-opacity"
-          >
-            Open demo →
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-[16px] font-normal mb-3 opacity-80">Deep links</h3>
-            <div className="space-y-2">
-              {[
-                { label: "Shifts (monthly view)", desc: "See how scheduling maps to attendance.", url: "https://app.eu2.demo.factorial.dev/shifts/monthly/employees/2026/1/1", isDemo: true },
-                { label: "Time off approvals (Help Center)", desc: "How approvals and policies behave at scale.", url: "https://help.factorialhr.com/one/one-ai-%E2%80%93-time-off-management-approvals?from_search=218384939", isDemo: false },
-                { label: "AI reports entry point", desc: "Explore the reporting experience in demo.", url: "https://app.eu2.demo.factorial.dev/analytics/reports/dashboards/105102/list/question", isDemo: true },
-              ].map((f) => (
-                <a
-                  key={f.label}
-                  href={f.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-2 border border-white/15 p-3 hover:border-white/35 hover:bg-white/[0.04] transition-all group cursor-pointer"
-                >
-                  <Check size={16} className="opacity-60 shrink-0 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-medium opacity-90 group-hover:opacity-100 transition-opacity">{f.label}</p>
-                    <p className="text-[11px] opacity-55 mt-0.5 leading-snug">{f.desc}</p>
-                  </div>
-                  <span className="text-[10px] opacity-40 group-hover:opacity-70 shrink-0 mt-0.5">{f.isDemo ? "Demo" : "Help"}</span>
-                </a>
-              ))}
+      <div className="flex flex-col justify-center h-full px-[120px]">
+        <SectionLabel>Next</SectionLabel>
+        <SlideTitle>Three steps to move forward</SlideTitle>
+        <div className="grid grid-cols-3 gap-10 mt-12">
+          {[
+            { step: "1", title: "Confirm scope", desc: "HR + Operations align phase-one modules and sites." },
+            { step: "2", title: "Approve terms", desc: "Management signs commercial alignment." },
+            { step: "3", title: "Start onboarding", desc: `${d.partner} + Factorial kick off ${d.onboardingDias}-day rollout.` },
+          ].map((item) => (
+            <div key={item.step} className="border border-white/25 p-10 text-center">
+              <p className="text-[48px] font-light mb-4">{item.step}</p>
+              <h4 className="text-[28px] font-medium mb-3">{item.title}</h4>
+              <p className="text-[20px] opacity-70">{item.desc}</p>
             </div>
-          </div>
-
-          <div>
-            <h3 className="text-[16px] font-normal mb-3 opacity-80">Why this matches your priorities</h3>
-            <div className="space-y-2">
-              {[
-                { title: "Remote attendance", desc: "Mobile clock-in with geolocation, timesheet approval, and attendance exports." },
-                { title: "Core HR in one place", desc: "Directory, documents, e-signatures, and onboarding linked to time and hiring." },
-                { title: "Hiring that fits your volume", desc: "Career page, Indeed/LinkedIn, and WhatsApp-friendly candidate follow-up." },
-              ].map((g) => (
-                <div key={g.title} className="border border-white/15 p-4">
-                  <h4 className="text-[14px] font-normal mb-1">{g.title}</h4>
-                  <p className="text-[12px] opacity-60 leading-snug">{g.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
+        <p className="text-[24px] opacity-70 mt-12 text-center max-w-[1000px] mx-auto">
+          Staying on spreadsheets requires more justification than standardizing now.
+        </p>
       </div>
     ),
   },
 
   {
     id: "video",
-    title: "Video",
+    title: "Closing",
+    summary: "See Factorial in action",
+    icon: <Video size={24} />,
+    gradient: "from-[hsl(347,100%,25%)] to-[hsl(347,80%,12%)]",
     bg: "dark",
     content: (
-      <div className="flex flex-col justify-center items-center h-full px-14 text-center">
-        <SectionLabel>Overview</SectionLabel>
-        <SlideTitle>See the employee experience</SlideTitle>
-        <div className="w-full max-w-[900px] mt-4 mx-auto aspect-video max-h-[340px]">
+      <div className="flex flex-col justify-center items-center h-full px-[120px] text-center">
+        <SectionLabel>See it live</SectionLabel>
+        <SlideTitle>Imagine your HR operating this way</SlideTitle>
+        <div className="w-[960px] h-[540px] mt-8">
           <iframe
             width="960"
             height="540"
             src="https://www.youtube.com/embed/6sUn2w1hRv0?start=26"
-            title="Factorial product overview"
+            title="Factorial overview"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full border-2 border-white/20"
           />
-        </div>
-      </div>
-    ),
-  },
-
-  {
-    id: "onboarding",
-    title: "Onboarding",
-    bg: "light",
-    content: (
-      <div className="flex flex-col justify-center h-full px-14">
-        <SectionLabel>Implementation</SectionLabel>
-        <SlideTitle>Onboarding: how we get you live</SlideTitle>
-        <SlideSubtitle>
-          Structured, weekly sessions so your team adopts Factorial with confidence — without rushing day-to-day work.
-        </SlideSubtitle>
-
-        <div className="grid grid-cols-2 gap-6 mt-4">
-          <div className="border border-foreground/20 p-5 bg-foreground/[0.03]">
-            <p className="text-[11px] uppercase tracking-widest opacity-50 mb-2">During implementation</p>
-            <h3 className="text-[17px] font-medium mb-3">Dedicated Onboarding Specialist</h3>
-            <p className="text-[13px] opacity-70 leading-snug mb-4">
-              From kickoff to go-live, a <strong className="opacity-100">Factorial Onboarding Specialist</strong> configures your Starter Planning modules:
-              Core (directory, documents, workflows), Time Tracking, Time Off, Shifts, Recruitment basics, and payroll-ready exports.
-            </p>
-            <ul className="space-y-2 text-[12px] opacity-75">
-              <li className="flex gap-2"><Check size={14} className="shrink-0 mt-0.5 opacity-70" /> One <strong>live session per week</strong></li>
-              <li className="flex gap-2"><Check size={14} className="shrink-0 mt-0.5 opacity-70" /> Each session: <strong>1 hour</strong>, focused and actionable</li>
-              <li className="flex gap-2"><Check size={14} className="shrink-0 mt-0.5 opacity-70" /> Plan: <strong>~1.5 months</strong> (≈6 weeks) to implementation at most</li>
-            </ul>
-          </div>
-
-          <div className="border border-foreground/20 p-5">
-            <p className="text-[11px] uppercase tracking-widest opacity-50 mb-2">After go-live</p>
-            <h3 className="text-[17px] font-medium mb-3">Your exclusive Account Manager</h3>
-            <p className="text-[13px] opacity-70 leading-snug mb-4">
-              When onboarding ends, you are not left on your own. Factorial assigns an <strong className="opacity-100">Account Manager dedicated to your organization</strong> — your day-to-day commercial and success contact for adoption, renewals, and growing the platform.
-            </p>
-            <ul className="space-y-2 text-[12px] opacity-75">
-              <li className="flex gap-2"><Check size={14} className="shrink-0 mt-0.5 opacity-70" /> Same partner mindset: Specialist first, then <strong className="opacity-100">one named Account Manager</strong></li>
-              <li className="flex gap-2"><Check size={14} className="shrink-0 mt-0.5 opacity-70" /> Ongoing alignment on usage, training, and next modules</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-4 border-t border-foreground/15 pt-4 flex flex-wrap gap-4 items-center justify-between text-[12px] opacity-65">
-          <span>
-            <strong className="opacity-90">Cadence:</strong> 1× week · 1 hour · ~6 sessions over ~1.5 months to full rollout
-          </span>
-          <span className="opacity-50">Proposal prepared for {ORG} — 2026</span>
         </div>
       </div>
     ),

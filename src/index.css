@@ -2,66 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Factorial brand hex (Design/coresfactorial.txt) */
-:root {
-  --factorial-radical-red: #ff355e;
-  --factorial-viridian: #07a2ad;
-  --factorial-sunbeam: #ffb940;
-  --factorial-tangerine: #ff9153;
-  --factorial-midnight: #25253d;
-}
-
-/* Factorial Design System
-   All colors MUST be HSL.
-   
-   Palette:
-   - Factorial Red (#FF355E): 347 100% 60% — Primary, hero, CTAs
-   - Viridian Green (#07A2AD): 184 92% 35% — Cool accents, highlights
-   - Sunbeam (#FFB940): 37 100% 63% — Warm accents
-   - Tangerine (#FF9153): 22 100% 66% — Secondary highlights
-   - Midnight (#25253D): 240 25% 19% — Base dark background
-*/
+/* PROMPT-UNICO-PROPOSTA.md design tokens + Factorial brand */
 
 @layer base {
   :root {
-    --background: 240 25% 19%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 347 80% 15%;
 
-    --card: 240 22% 24%;
+    --card: 347 60% 20%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 240 22% 24%;
+    --popover: 347 70% 18%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 347 100% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 240 25% 19%;
+    --secondary: 347 50% 18%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 20% 28%;
-    --muted-foreground: 0 0% 90%;
+    --muted: 347 30% 25%;
+    --muted-foreground: 0 0% 80%;
 
-    --accent: 22 100% 66%;
-    --accent-foreground: 240 25% 19%;
+    --accent: 37 100% 63%;
+    --accent-foreground: 347 80% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 15% 35%;
-    --input: 240 15% 35%;
-    --ring: 184 92% 35%;
+    --border: 347 40% 30%;
+    --input: 347 40% 30%;
+    --ring: 37 100% 63%;
 
     --radius: 0.25rem;
 
     --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
-
-    /* Custom tokens */
-    --factorial-red: 347 100% 60%;
-    --viridian-green: 184 92% 35%;
-    --sunbeam: 37 100% 63%;
-    --tangerine: 22 100% 66%;
-    --midnight: 240 25% 19%;
   }
 }
 

@@ -1,46 +1,22 @@
 /**
- * Commercial proposal constants — Best Care Facilities (ROW USD, monthly).
+ * Best Care Facilities — proposal numbers (single source of truth).
  */
 
-export const CLIENT = {
-  organizationName: "Best Care Facilities",
-  seatCount: 100,
-  listPricePerSeatPerMonth: 7,
-} as const;
-
-export const PRICING_ROW_USD = {
-  bundleName: "Modular workforce platform",
-  listPricePerSeatPerMonth: CLIENT.listPricePerSeatPerMonth,
-  recruitment: {
-    tier: "Optional — 5 Active Jobs (example)",
-    listPricePerMonth: 89,
-  },
-  implementation: {
-    listPriceOneTime: 700,
-    discountedOneTime: 700,
-  },
-} as const;
-
-const licenseList = CLIENT.seatCount * PRICING_ROW_USD.listPricePerSeatPerMonth;
-const recruitmentList = PRICING_ROW_USD.recruitment.listPricePerMonth;
-
-export const PRICING_TOTALS_USD = {
-  licenseListSubtotal: licenseList,
-  licenseDiscountedSubtotal: licenseList,
-  recruitmentListPerMonth: recruitmentList,
-  recruitmentDiscountedSubtotal: recruitmentList,
-  monthlyTotal: licenseList,
-  implementationListOneTime: PRICING_ROW_USD.implementation.listPriceOneTime,
-  implementationOneTime: PRICING_ROW_USD.implementation.discountedOneTime,
-} as const;
-
 export const DEFAULT_VALUES = {
-  empresa: CLIENT.organizationName,
-  contacto: `${CLIENT.organizationName} — HR team`,
-  totalColaboradoresInternos: CLIENT.seatCount,
-  totalColaboradoresExternos: 0,
-  custoColaboradorMes_USD: PRICING_ROW_USD.listPricePerSeatPerMonth,
-  minimoContrato: CLIENT.seatCount,
-  valorMinimo_USD: PRICING_TOTALS_USD.monthlyTotal,
-  valorTotal100_USD: PRICING_TOTALS_USD.monthlyTotal,
-};
+  empresa: "Best Care Facilities",
+  legalName: "Best Care Facility Services",
+  partner: "Talent Grid Africa",
+  totalColaboradores: 100,
+  custoColaboradorMes_USD: 7,
+  mensalFactorial_USD: 700,
+  implantacaoFactorial_USD: 700,
+  onboardingDias: "30–45",
+  // estimativa — refine with client Finance
+  horasRHManualMes: 48,
+  custoHoraRH_USD: 15,
+  custoManualMensal_USD: 720,
+  custoManualAnual_USD: 8640,
+  vendedor: "Victor Gutierrez",
+  cargoVendedor: "Business Development · Factorial",
+  emailVendedor: "victor.gutierrez@factorial.co",
+} as const;
