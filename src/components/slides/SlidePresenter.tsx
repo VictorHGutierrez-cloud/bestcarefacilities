@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Grid3X3, Home, Maximize, Minimize } from "lucide-react";
+import { ProposalPageShell } from "@/components/layout/ProposalPageShell";
 import SlideLayout from "./SlideLayout";
 import { SlideOverviewGrid } from "./SlideOverviewGrid";
 import { slides } from "./slides";
@@ -110,24 +111,22 @@ const SlidePresenter = () => {
 
   if (showGrid) {
     return (
-      <div className="proposal-font min-h-screen bg-background text-foreground p-4 md:p-8 overflow-y-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 max-w-[1600px] mx-auto">
-          <div>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
-            >
-              <Home size={16} />
-              Home
-            </Link>
-            <h2 className="text-xl md:text-2xl font-semibold text-foreground">Proposal overview</h2>
-            <p className="text-sm text-muted-foreground mt-1">Click a card to open that slide</p>
-          </div>
+      <ProposalPageShell
+        title="Proposal overview"
+        subtitle="Click a card to open that slide · Press G inside a slide to return here"
+        className="overflow-y-auto"
+      >
+        <div className="mb-6">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Home size={16} />
+            Home
+          </Link>
         </div>
-        <div className="max-w-[1600px] mx-auto">
-          <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
-        </div>
-      </div>
+        <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
+      </ProposalPageShell>
     );
   }
 
