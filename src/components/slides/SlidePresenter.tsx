@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize, Minimize, Grid3X3 } from "lucide-react";
 import SlideLayout from "./SlideLayout";
+import { SlideOverviewGrid } from "./SlideOverviewGrid";
 import { slides } from "./slides";
 import { cn } from "@/lib/utils";
 
@@ -70,31 +71,21 @@ const SlidePresenter = () => {
   // Grid View
   if (showGrid) {
     return (
-      <div className="min-h-screen bg-primary text-primary-foreground p-4 md:p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg md:text-xl font-light">All slides</h2>
-          <button onClick={() => setShowGrid(false)} className="text-sm opacity-60 hover:opacity-100 transition-opacity">
+      <div className="min-h-screen bg-primary text-primary-foreground p-4 md:p-8 overflow-y-auto">
+        <div className="flex items-center justify-between mb-6 max-w-[1600px] mx-auto">
+          <div>
+            <h2 className="text-lg md:text-2xl font-light">All slides</h2>
+            <p className="text-sm text-white/50 mt-1">Press G or Esc to close · Click a card to jump</p>
+          </div>
+          <button
+            onClick={() => setShowGrid(false)}
+            className="text-sm px-4 py-2 border border-white/20 rounded-md opacity-80 hover:opacity-100 hover:bg-white/10 transition-all"
+          >
             Close
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-          {slides.map((s, i) => (
-            <button
-              key={s.id}
-              onClick={() => goTo(i)}
-              className={cn(
-                "relative aspect-video overflow-hidden border-2 transition-all hover:scale-[1.02]",
-                i === current ? "border-white/60" : "border-white/10 hover:border-white/30"
-              )}
-            >
-              <div className={cn("absolute inset-0 overflow-hidden", bgClasses[s.bg])}>
-                <SlideLayout>{s.content}</SlideLayout>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-3 py-1.5 text-left">
-                <span className="text-xs opacity-80">{i + 1}. {s.title}</span>
-              </div>
-            </button>
-          ))}
+        <div className="max-w-[1600px] mx-auto">
+          <SlideOverviewGrid slides={slides} currentIndex={current} onSelect={goTo} />
         </div>
       </div>
     );

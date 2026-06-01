@@ -1,4 +1,6 @@
-import { ExpandableImage } from "@/components/ui/ImageLightbox";
+import { useState, useEffect } from "react";
+import { ResourceCardsGrid } from "@/components/ui/cards-grid";
+import { LightboxOverlay } from "@/components/ui/ImageLightbox";
 import reportRotatividade from "@/assets/reports/report-rotatividade.png";
 import reportDesempenho from "@/assets/reports/report-desempenho.png";
 import reportAusencias from "@/assets/reports/report-ausencias.png";
@@ -14,47 +16,47 @@ const REPORTS = [
 ];
 
 export function ReportsGallery() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (openIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenIdx(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openIdx]);
+
+  const openReport = openIdx !== null ? REPORTS[openIdx] : null;
+
+  const toCardItems = (slice: typeof REPORTS, offset: number) =>
+    slice.map((report, i) => ({
+      title: report.title,
+      subtitle: `${report.category} · Click to expand`,
+      imageSrc: report.src,
+      onClick: () => setOpenIdx(offset + i),
+    }));
+
   return (
     <>
-      <div className="grid grid-cols-3 gap-6 mt-4">
-        {REPORTS.slice(0, 3).map((r) => (
-          <ReportCard key={r.title} report={r} />
-        ))}
-      </div>
-      <div className="grid grid-cols-2 gap-6 mt-6 max-w-[1100px] mx-auto w-full">
-        {REPORTS.slice(3, 5).map((r) => (
-          <ReportCard key={r.title} report={r} />
-        ))}
-      </div>
-    </>
-  );
-}
+      <ResourceCardsGrid columns={3} className="mt-4" items={toCardItems(REPORTS.slice(0, 3), 0)} />
+      <ResourceCardsGrid
+        columns={2}
+        className="mt-5 max-w-[820px] mx-auto w-full"
+        items={toCardItems(REPORTS.slice(3, 5), 3)}
+      />
 
-function ReportCard({
-  report,
-}: {
-  report: { src: string; title: string; category: string };
-}) {
-  return (
-    <ExpandableImage
-      src={report.src}
-      alt={report.title}
-      title={report.title}
-      caption={report.category}
-      className="group border border-foreground/20 bg-background overflow-hidden hover:border-foreground/40 hover:shadow-xl transition-all duration-300"
-      imgClassName="aspect-[16/10] object-cover object-top group-hover:scale-105 transition-transform duration-500"
-    >
-      <div className="aspect-[16/10] overflow-hidden bg-foreground/5">
-        <img
-          src={report.src}
-          alt={report.title}
-          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 pointer-events-none"
+      {openReport && (
+        <LightboxOverlay
+          image={{
+            src: openReport.src,
+            alt: openReport.title,
+            title: openReport.title,
+            caption: openReport.category,
+          }}
+          onClose={() => setOpenIdx(null)}
         />
-      </div>
-      <div className="p-6 pointer-events-none">
-        <p className="text-[18px] tracking-[0.2em] uppercase text-foreground/60 mb-2">{report.category}</p>
-        <p className="text-[26px] font-light leading-tight text-foreground">{report.title}</p>
-      </div>
-    </ExpandableImage>
+      )}
+    </>
   );
 }
