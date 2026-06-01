@@ -1,4 +1,4 @@
-import { ResourceCardsGrid } from "@/components/ui/cards-grid";
+import { ColorfulPillCardsGrid, slidePillAccent } from "@/components/ui/card-1";
 import type { SlideData } from "./slides";
 
 interface SlideOverviewGridProps {
@@ -9,14 +9,14 @@ interface SlideOverviewGridProps {
 
 export function SlideOverviewGrid({ slides, currentIndex, onSelect }: SlideOverviewGridProps) {
   return (
-    <ResourceCardsGrid
-      variant="presenter"
-      columns={4}
-      className="max-w-[1600px]"
+    <ColorfulPillCardsGrid
+      columns={2}
+      className="max-w-[1200px] mx-auto border-none bg-transparent p-0 shadow-none"
       items={slides.map((slide, index) => ({
-        title: `${index + 1}. ${slide.title}`,
-        subtitle: slide.summary,
-        icon: <span className="text-white [&_svg]:h-5 [&_svg]:w-5">{slide.icon}</span>,
+        name: `${index + 1}. ${slide.title}`,
+        detail: slide.summary,
+        logo: <span className="[&_svg]:h-5 [&_svg]:w-5">{slide.icon}</span>,
+        accent: slidePillAccent(index),
         active: index === currentIndex,
         onClick: () => onSelect(index),
       }))}

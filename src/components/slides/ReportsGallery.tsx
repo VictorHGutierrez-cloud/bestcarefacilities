@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { ResourceCardsGrid } from "@/components/ui/cards-grid";
+import { BarChart3, LineChart, PieChart, Users, Wallet } from "lucide-react";
+import { ColorfulPillCardsGrid, slidePillAccent } from "@/components/ui/card-1";
 import { LightboxOverlay } from "@/components/ui/ImageLightbox";
 import reportRotatividade from "@/assets/reports/report-rotatividade.png";
 import reportDesempenho from "@/assets/reports/report-desempenho.png";
@@ -8,11 +9,11 @@ import reportFuncionarios from "@/assets/reports/report-funcionarios.png";
 import reportFolha from "@/assets/reports/report-folha.png";
 
 const REPORTS = [
-  { src: reportRotatividade, title: "Turnover & retention", category: "People analytics" },
-  { src: reportDesempenho, title: "Performance", category: "Performance" },
-  { src: reportAusencias, title: "Absences", category: "HR operations" },
-  { src: reportFuncionarios, title: "Employees", category: "HR operations" },
-  { src: reportFolha, title: "Payroll management", category: "Payroll" },
+  { src: reportRotatividade, title: "Turnover & retention", category: "People analytics", icon: <LineChart className="h-5 w-5" /> },
+  { src: reportDesempenho, title: "Performance", category: "Performance", icon: <BarChart3 className="h-5 w-5" /> },
+  { src: reportAusencias, title: "Absences", category: "HR operations", icon: <PieChart className="h-5 w-5" /> },
+  { src: reportFuncionarios, title: "Employees", category: "HR operations", icon: <Users className="h-5 w-5" /> },
+  { src: reportFolha, title: "Payroll management", category: "Payroll", icon: <Wallet className="h-5 w-5" /> },
 ];
 
 export function ReportsGallery() {
@@ -29,21 +30,29 @@ export function ReportsGallery() {
 
   const openReport = openIdx !== null ? REPORTS[openIdx] : null;
 
-  const toCardItems = (slice: typeof REPORTS, offset: number) =>
+  const toItems = (slice: typeof REPORTS, offset: number) =>
     slice.map((report, i) => ({
-      title: report.title,
-      subtitle: `${report.category} · Click to expand`,
-      imageSrc: report.src,
+      name: report.title,
+      detail: `${report.category} · Click to expand preview`,
+      logo: report.icon,
+      accent: slidePillAccent(offset + i),
       onClick: () => setOpenIdx(offset + i),
     }));
 
   return (
     <>
-      <ResourceCardsGrid columns={3} className="mt-4" items={toCardItems(REPORTS.slice(0, 3), 0)} />
-      <ResourceCardsGrid
+      <ColorfulPillCardsGrid
+        title="Managerial reports"
+        theme="light"
         columns={2}
-        className="mt-5 max-w-[820px] mx-auto w-full"
-        items={toCardItems(REPORTS.slice(3, 5), 3)}
+        className="mt-2 max-w-[1000px]"
+        items={toItems(REPORTS.slice(0, 3), 0)}
+      />
+      <ColorfulPillCardsGrid
+        theme="light"
+        columns={2}
+        className="mt-4 max-w-[680px] mx-auto"
+        items={toItems(REPORTS.slice(3, 5), 3)}
       />
 
       {openReport && (
