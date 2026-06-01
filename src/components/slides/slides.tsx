@@ -16,6 +16,13 @@ import {
 } from "lucide-react";
 import { DEFAULT_VALUES as d } from "@/utils/constants";
 import { formatUSD } from "@/utils/formatters";
+import { ReportsGallery } from "./ReportsGallery";
+import factorialWhy from "@/assets/factorial/factorial-why.jpg";
+import factorialModules from "@/assets/factorial/factorial-modules.jpg";
+import factorialPerformance from "@/assets/factorial/factorial-performance.jpg";
+import factorialCosts from "@/assets/factorial/factorial-costs.jpg";
+import factorialDecisions from "@/assets/factorial/factorial-decisions.jpg";
+import factorialWhoWeAre from "@/assets/factorial/factorial-who-we-are.jpg";
 
 export interface SlideData {
   id: string;
@@ -28,9 +35,7 @@ export interface SlideData {
 }
 
 const SectionLabel = ({ children }: { children: ReactNode }) => (
-  <p className="text-[32px] tracking-[0.25em] uppercase opacity-80 mb-8 font-bold text-primary-foreground">
-    {children}
-  </p>
+  <p className="text-[32px] tracking-[0.25em] uppercase opacity-90 mb-8 font-bold">{children}</p>
 );
 
 const SlideTitle = ({ children }: { children: ReactNode }) => (
@@ -177,7 +182,7 @@ export const slides: SlideData[] = [
                 <span className="text-[30px] shrink-0">{item.icon}</span>
                 <div>
                   <h4 className="text-[22px] font-medium mb-1">{item.title}</h4>
-                  <p className="text-[19px] opacity-60">{item.desc}</p>
+                  <p className="text-[19px] text-foreground/75">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -432,34 +437,57 @@ export const slides: SlideData[] = [
             Open demo →
           </a>
         </div>
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-2 gap-12">
           <div className="space-y-4">
             {[
               { label: "Mobile clocking", desc: "Field teams capture time without HR in the middle." },
               { label: "Leave & approvals", desc: "Managers see coverage before approving absence." },
               { label: "Hiring pipeline", desc: "Candidates tracked; WhatsApp where it still helps." },
             ].map((f) => (
-              <div key={f.label} className="flex items-start gap-4 border border-foreground/15 p-6">
-                <Check size={24} className="opacity-60 shrink-0 mt-1" />
+              <div key={f.label} className="flex items-start gap-4 border border-foreground/20 bg-background p-6">
+                <Check size={24} className="text-foreground shrink-0 mt-1" />
                 <div>
-                  <p className="text-[24px] font-medium opacity-90">{f.label}</p>
-                  <p className="text-[19px] opacity-80 mt-1">{f.desc}</p>
+                  <p className="text-[24px] font-medium text-foreground">{f.label}</p>
+                  <p className="text-[19px] text-foreground/80 mt-1">{f.desc}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="space-y-6">
-            {[
-              { title: "Payroll-ready month-end", desc: "Hours and leave export with approval history." },
-              { title: "Training & compliance", desc: "Mandatory certs tracked with expiry alerts." },
-              { title: "Projects per client", desc: "Hours and spend visible by deployment." },
-            ].map((g) => (
-              <div key={g.title} className="border border-foreground/15 p-8">
-                <h4 className="text-[26px] font-normal mb-2">{g.title}</h4>
-                <p className="text-[22px] opacity-60">{g.desc}</p>
-              </div>
-            ))}
+          <div className="border border-foreground/15 overflow-hidden bg-background">
+            <img
+              src={factorialWhy}
+              alt="Factorial HR platform overview"
+              className="w-full h-full object-cover object-center min-h-[380px]"
+            />
           </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: "factorial-value",
+    title: "Why Factorial",
+    summary: "Platform breadth, performance, cost control, decisions",
+    icon: <Rocket size={24} />,
+    gradient: "from-[hsl(347,70%,18%)] to-[hsl(347,50%,10%)]",
+    bg: "dark",
+    content: (
+      <div className="flex flex-col justify-center h-full px-[120px] py-[48px]">
+        <SectionLabel>Why Factorial</SectionLabel>
+        <SlideTitle>One platform for how you actually run HR</SlideTitle>
+        <div className="grid grid-cols-4 gap-5 mt-6">
+          {[
+            { src: factorialPerformance, label: "Build high-performance teams" },
+            { src: factorialCosts, label: "Control costs & expenses" },
+            { src: factorialDecisions, label: "Make better decisions" },
+            { src: factorialWhoWeAre, label: "Built for growing companies" },
+          ].map((item) => (
+            <div key={item.label} className="border border-white/20 overflow-hidden bg-white/5">
+              <img src={item.src} alt={item.label} className="w-full h-[200px] object-cover object-top" />
+              <p className="text-[17px] font-medium p-4 leading-snug">{item.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     ),
@@ -476,19 +504,8 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center h-full px-[120px] py-[60px]">
         <SectionLabel>Proof</SectionLabel>
         <SlideTitle>Decisions with data — not Excel</SlideTitle>
-        <SlideSubtitle>What leadership gains when attendance, leave, and headcount live in one place.</SlideSubtitle>
-        <div className="grid grid-cols-3 gap-6 mt-8">
-          {[
-            { title: "Attendance", desc: "Who is on site, late, or missing — by team and client." },
-            { title: "Absences", desc: "Planned leave vs sick leave with evidence attached." },
-            { title: "Headcount", desc: "Active hires, onboarding status, training compliance." },
-          ].map((r) => (
-            <div key={r.title} className="border border-foreground/15 p-8">
-              <h4 className="text-[26px] font-normal mb-3">{r.title}</h4>
-              <p className="text-[20px] opacity-70">{r.desc}</p>
-            </div>
-          ))}
-        </div>
+        <SlideSubtitle>Click any report to explore — real Factorial views.</SlideSubtitle>
+        <ReportsGallery />
       </div>
     ),
   },
@@ -591,29 +608,38 @@ export const slides: SlideData[] = [
       <div className="flex flex-col justify-center h-full px-[120px]">
         <SectionLabel>For IT & management</SectionLabel>
         <SlideTitle>Security & compliance posture</SlideTitle>
-        <div className="grid grid-cols-2 gap-10 mt-6">
-          <div className="border border-white/20 p-8 space-y-4">
-            {[
-              { label: "Hosting", value: "AWS + Azure (incl. EU regions)" },
-              { label: "Availability", value: "SLA-backed infrastructure" },
-              { label: "Recovery", value: "Disaster recovery in place" },
-            ].map((r) => (
-              <div key={r.label} className="flex justify-between text-[20px]">
-                <span className="opacity-60">{r.label}</span>
-                <span className="font-medium text-right">{r.value}</span>
-              </div>
-            ))}
-          </div>
-          <div className="border border-white/20 p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <Shield size={24} className="opacity-70" />
-              <h3 className="text-[26px] font-medium">Certifications</h3>
+        <div className="grid grid-cols-[1fr_1.1fr] gap-10 mt-6">
+          <div className="space-y-6">
+            <div className="border border-white/20 p-8 space-y-4">
+              {[
+                { label: "Hosting", value: "AWS + Azure (incl. EU regions)" },
+                { label: "Availability", value: "SLA-backed infrastructure" },
+                { label: "Recovery", value: "Disaster recovery in place" },
+              ].map((r) => (
+                <div key={r.label} className="flex justify-between text-[20px]">
+                  <span className="opacity-75">{r.label}</span>
+                  <span className="font-medium text-right">{r.value}</span>
+                </div>
+              ))}
             </div>
-            {["SOC 2 Type II", "ISO-aligned controls", "GDPR", "NDA available on request"].map((cert) => (
-              <p key={cert} className="text-[19px] opacity-70 flex items-center gap-3 mb-2">
-                <Check size={16} className="opacity-60 shrink-0" /> {cert}
-              </p>
-            ))}
+            <div className="border border-white/20 p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <Shield size={24} className="opacity-80" />
+                <h3 className="text-[26px] font-medium">Certifications</h3>
+              </div>
+              {["SOC 2 Type II", "ISO-aligned controls", "GDPR", "NDA available on request"].map((cert) => (
+                <p key={cert} className="text-[19px] opacity-85 flex items-center gap-3 mb-2">
+                  <Check size={16} className="shrink-0" /> {cert}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="border border-white/20 overflow-hidden bg-white/5 flex items-center justify-center p-4">
+            <img
+              src={factorialModules}
+              alt="Factorial HR modules"
+              className="w-full max-h-[520px] object-contain"
+            />
           </div>
         </div>
       </div>

@@ -105,21 +105,25 @@ const SlidePresenter = () => {
       {/* Main slide area */}
       <div className="flex-1 flex min-h-0">
         {/* Thumbnail sidebar - hidden on mobile */}
-        <div className="hidden xl:flex flex-col w-44 border-r border-white/10 overflow-y-auto bg-primary py-2 px-2 gap-1.5">
+        <div className="hidden xl:flex flex-col w-52 border-r border-white/10 overflow-y-auto bg-primary py-2 px-2 gap-2">
           {slides.map((s, i) => (
             <button
               key={s.id}
               onClick={() => goTo(i)}
               className={cn(
                 "relative aspect-video w-full overflow-hidden border transition-all shrink-0",
-                i === current ? "border-white/50 ring-1 ring-white/20" : "border-white/10 hover:border-white/25 opacity-60 hover:opacity-100"
+                i === current ? "border-white/50 ring-1 ring-white/20" : "border-white/10 hover:border-white/25"
               )}
             >
-              <div className={cn("absolute inset-0 overflow-hidden", bgClasses[s.bg])}>
+              <div className={cn("absolute inset-0 overflow-hidden opacity-25 pointer-events-none", bgClasses[s.bg])}>
                 <SlideLayout>{s.content}</SlideLayout>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-1.5 py-0.5">
-                <span className="text-[10px] text-white/80">{i + 1}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
+              <div className="absolute bottom-0 left-0 right-0 px-2 py-2 text-left">
+                <span className="text-[11px] font-semibold text-white leading-tight block">
+                  {i + 1}. {s.title}
+                </span>
+                <span className="text-[9px] text-white/75 leading-snug line-clamp-2 mt-0.5">{s.summary}</span>
               </div>
             </button>
           ))}
