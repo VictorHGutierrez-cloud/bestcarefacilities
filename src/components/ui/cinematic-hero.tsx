@@ -157,6 +157,7 @@ const INJECTED_STYLES = `
 
 export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   brandName?: string;
+  heroSubtitle?: string;
   tagline1?: string;
   tagline2?: string;
   cardHeading?: string;
@@ -165,24 +166,27 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   metricLabel?: string;
   ctaHeading?: string;
   ctaDescription?: string;
+  ctaButtonLabel?: string;
   onCtaClick?: () => void;
 }
 
 export function CinematicHero({
-  brandName = "FACTORIAL RH",
-  tagline1 = "Plataforma completa",
-  tagline2 = "para a gestão de RH.",
-  cardHeading = "RH inteligente, integrado.",
+  brandName = "FACTORIAL HR",
+  heroSubtitle = "Best Care Facilities · Kenya",
+  tagline1 = "One platform for",
+  tagline2 = "workforce operations.",
+  cardHeading = "Smarter HR, fully connected.",
   cardDescription = (
     <>
-      A Factorial centraliza todos os processos de recursos humanos numa plataforma única
-      com <strong>IA integrada</strong>, automação e integrações nativas com Microsoft, Primavera e sistemas de ponto.
+      Factorial unifies HR in one platform with <strong>built-in AI</strong>, automation, and integrations for
+      time, documents, hiring, and analytics.
     </>
   ),
-  metricValue = 15,
-  metricLabel = "unidades de negócios",
-  ctaHeading = "Acessar a Proposta",
-  ctaDescription = "Descubra como a Factorial pode transformar a gestão de RH da Dulceria Nacional com automação, IA e integrações.",
+  metricValue = 100,
+  metricLabel = "employees managed",
+  ctaHeading = "Open the proposal",
+  ctaDescription = "Executive narrative, operating model, investment, and decision path.",
+  ctaButtonLabel = "Open proposal →",
   onCtaClick,
   className,
   ...props
@@ -336,7 +340,7 @@ export function CinematicHero({
             <span className="text-days text-silver-matte block mt-2">{tagline2}</span>
           </h1>
           <p className="text-track mt-8 text-lg md:text-xl text-white/50 max-w-md text-center">
-            Grupo Webcor
+            {heroSubtitle}
           </p>
         </div>
 
@@ -402,7 +406,7 @@ export function CinematicHero({
                         />
                       </svg>
                       <div>
-                        <p className="text-white/40 text-[10px] uppercase tracking-wider">Assiduidade</p>
+                        <p className="text-white/40 text-[10px] uppercase tracking-wider">Attendance</p>
                         <p className="text-white text-xl font-bold">98%</p>
                       </div>
                     </div>
@@ -410,20 +414,20 @@ export function CinematicHero({
                     {/* Metrics row */}
                     <div className="phone-widget grid grid-cols-2 gap-2 mb-3">
                       <div className="widget-depth rounded-xl p-3">
-                        <p className="text-white/40 text-[9px] uppercase tracking-wider">Presentes</p>
-                        <p className="text-white text-lg font-bold">487</p>
+                        <p className="text-white/40 text-[9px] uppercase tracking-wider">On site</p>
+                        <p className="text-white text-lg font-bold">{Math.max(metricValue - 13, 0)}</p>
                       </div>
                       <div className="widget-depth rounded-xl p-3">
-                        <p className="text-white/40 text-[9px] uppercase tracking-wider">Ausências</p>
+                        <p className="text-white/40 text-[9px] uppercase tracking-wider">Absences</p>
                         <p className="text-[#FF355E] text-lg font-bold">13</p>
                       </div>
                     </div>
 
                     {/* Team widget */}
                     <div className="phone-widget widget-depth rounded-xl p-3">
-                      <p className="text-white/40 text-[9px] uppercase tracking-wider mb-2">Equipas</p>
+                      <p className="text-white/40 text-[9px] uppercase tracking-wider mb-2">Teams</p>
                       <div className="flex items-center gap-2">
-                        {["Produção", "Admin", "Logística"].map((team) => (
+                        {["Field ops", "Admin", "Client sites"].map((team) => (
                           <span key={team} className="text-[9px] text-white/70 bg-white/5 rounded-full px-2 py-1">
                             {team}
                           </span>
@@ -438,10 +442,10 @@ export function CinematicHero({
 
           {/* Floating badges */}
           <div className="floating-badge floating-ui-badge absolute top-[12%] right-[8%] md:right-[15%] z-30 rounded-2xl px-3 md:px-5 py-2 md:py-3 hidden sm:block">
-            <p className="text-white text-xs md:text-sm font-semibold">3.000+ Colaboradores</p>
+            <p className="text-white text-xs md:text-sm font-semibold">{metricValue}+ employees</p>
           </div>
           <div className="floating-badge floating-ui-badge absolute bottom-[18%] left-[5%] md:left-[12%] z-30 rounded-2xl px-3 md:px-5 py-2 md:py-3 hidden sm:block">
-            <p className="text-white text-xs md:text-sm font-semibold">IA & Automação</p>
+            <p className="text-white text-xs md:text-sm font-semibold">AI & automation</p>
           </div>
           <div className="floating-badge floating-ui-badge absolute bottom-[10%] right-[10%] md:right-[18%] z-30 rounded-2xl px-3 md:px-5 py-2 md:py-3 hidden sm:block">
             <p className="text-white text-xs md:text-sm font-semibold">Microsoft Partner</p>
@@ -457,7 +461,7 @@ export function CinematicHero({
             </p>
             <div className="flex gap-4">
               <button onClick={handleCtaClick} className="btn-modern-light rounded-2xl px-8 py-4 text-base font-semibold cursor-pointer">
-                Acessar →
+                {ctaButtonLabel}
               </button>
             </div>
           </div>

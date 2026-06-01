@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { CinematicHero } from "@/components/ui/cinematic-hero";
+import { ExpandableImage } from "@/components/ui/ImageLightbox";
 import { DEFAULT_VALUES } from "@/utils/constants";
 import factorialWhy from "@/assets/factorial/factorial-why.jpg";
 
@@ -10,8 +11,10 @@ const Landing = () => {
     <>
     <CinematicHero
       brandName="FACTORIAL HR"
+      heroSubtitle={`${DEFAULT_VALUES.empresa} · Kenya`}
       tagline1="One platform for"
       tagline2="workforce operations."
+      ctaButtonLabel="Open proposal →"
       cardHeading="Bridge the gap from spreadsheets to control."
       cardDescription={
         <>
@@ -37,9 +40,14 @@ const Landing = () => {
             {DEFAULT_VALUES.empresa} and ~{DEFAULT_VALUES.totalColaboradores} employees across client sites.
           </p>
         </div>
-        <div className="border border-white/15 overflow-hidden shadow-2xl">
-          <img src={factorialWhy} alt="Factorial HR platform" className="w-full h-auto object-cover" />
-        </div>
+        <ExpandableImage
+          src={factorialWhy}
+          alt="Factorial HR platform"
+          title="Factorial HR platform"
+          caption="Product overview"
+          className="border border-white/15 overflow-hidden shadow-2xl"
+          imgClassName="w-full h-auto object-cover"
+        />
       </div>
     </section>
     </>

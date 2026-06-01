@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { DEFAULT_VALUES as d } from "@/utils/constants";
 import { formatUSD } from "@/utils/formatters";
+import { ExpandableImage } from "@/components/ui/ImageLightbox";
 import { ReportsGallery } from "./ReportsGallery";
 import factorialWhy from "@/assets/factorial/factorial-why.jpg";
 import factorialModules from "@/assets/factorial/factorial-modules.jpg";
@@ -453,13 +454,14 @@ export const slides: SlideData[] = [
               </div>
             ))}
           </div>
-          <div className="border border-foreground/15 overflow-hidden bg-background">
-            <img
-              src={factorialWhy}
-              alt="Factorial HR platform overview"
-              className="w-full h-full object-cover object-center min-h-[380px]"
-            />
-          </div>
+          <ExpandableImage
+            src={factorialWhy}
+            alt="Factorial HR platform overview"
+            title="Factorial HR platform"
+            caption="Product overview"
+            className="border border-foreground/15 overflow-hidden bg-background min-h-[380px]"
+            imgClassName="w-full h-full object-cover object-center min-h-[380px]"
+          />
         </div>
       </div>
     ),
@@ -484,7 +486,14 @@ export const slides: SlideData[] = [
             { src: factorialWhoWeAre, label: "Built for growing companies" },
           ].map((item) => (
             <div key={item.label} className="border border-white/20 overflow-hidden bg-white/5">
-              <img src={item.src} alt={item.label} className="w-full h-[200px] object-cover object-top" />
+              <ExpandableImage
+                src={item.src}
+                alt={item.label}
+                title={item.label}
+                caption="Factorial"
+                className="w-full"
+                imgClassName="w-full h-[200px] object-cover object-top"
+              />
               <p className="text-[17px] font-medium p-4 leading-snug">{item.label}</p>
             </div>
           ))}
@@ -634,13 +643,14 @@ export const slides: SlideData[] = [
               ))}
             </div>
           </div>
-          <div className="border border-white/20 overflow-hidden bg-white/5 flex items-center justify-center p-4">
-            <img
-              src={factorialModules}
-              alt="Factorial HR modules"
-              className="w-full max-h-[520px] object-contain"
-            />
-          </div>
+          <ExpandableImage
+            src={factorialModules}
+            alt="Factorial HR modules"
+            title="All HR modules in one platform"
+            caption="Factorial"
+            className="border border-white/20 overflow-hidden bg-white/5 flex items-center justify-center p-4"
+            imgClassName="w-full max-h-[520px] object-contain"
+          />
         </div>
       </div>
     ),
