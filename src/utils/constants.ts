@@ -1,52 +1,42 @@
 /**
- * Commercial proposal constants (ROW USD, monthly).
+ * Commercial proposal constants — Best Care Facilities (ROW USD, monthly).
  */
 
 export const CLIENT = {
-  organizationName: "Cliente Sem Nome",
+  organizationName: "Best Care Facilities",
   seatCount: 100,
-  /** Nonprofit discount applied to licenses, recruitment, and implementation. */
-  licenseDiscountPercent: 50,
+  listPricePerSeatPerMonth: 7,
 } as const;
 
-const D = CLIENT.licenseDiscountPercent / 100;
-
-/** Starter Planning: Core + Time Tracking + Time Off + Shifts (Enterprise tier, monthly ROW USD). */
 export const PRICING_ROW_USD = {
-  bundleName: "Starter Planning Enterprise",
-  listPricePerSeatPerMonth: 7.5,
+  bundleName: "Modular workforce platform",
+  listPricePerSeatPerMonth: CLIENT.listPricePerSeatPerMonth,
   recruitment: {
-    tier: "5 Active Jobs",
-    /** ROW list price before nonprofit discount. */
+    tier: "Optional — 5 Active Jobs (example)",
     listPricePerMonth: 89,
   },
   implementation: {
-    /** Reference list before nonprofit discount (for transparency). */
-    listPriceOneTime: 500,
-    /** Discounted one-time onboarding fee. */
-    discountedOneTime: 250,
+    listPriceOneTime: 700,
+    discountedOneTime: 700,
   },
 } as const;
 
 const licenseList = CLIENT.seatCount * PRICING_ROW_USD.listPricePerSeatPerMonth;
-const licenseDiscounted = licenseList * (1 - D);
-
 const recruitmentList = PRICING_ROW_USD.recruitment.listPricePerMonth;
-const recruitmentDiscounted = recruitmentList * (1 - D);
 
 export const PRICING_TOTALS_USD = {
   licenseListSubtotal: licenseList,
-  licenseDiscountedSubtotal: licenseDiscounted,
+  licenseDiscountedSubtotal: licenseList,
   recruitmentListPerMonth: recruitmentList,
-  recruitmentDiscountedSubtotal: recruitmentDiscounted,
-  monthlyTotal: licenseDiscounted + recruitmentDiscounted,
+  recruitmentDiscountedSubtotal: recruitmentList,
+  monthlyTotal: licenseList,
   implementationListOneTime: PRICING_ROW_USD.implementation.listPriceOneTime,
   implementationOneTime: PRICING_ROW_USD.implementation.discountedOneTime,
 } as const;
 
 export const DEFAULT_VALUES = {
   empresa: CLIENT.organizationName,
-  contacto: "Cliente Sem Nome — HR team",
+  contacto: `${CLIENT.organizationName} — HR team`,
   totalColaboradoresInternos: CLIENT.seatCount,
   totalColaboradoresExternos: 0,
   custoColaboradorMes_USD: PRICING_ROW_USD.listPricePerSeatPerMonth,

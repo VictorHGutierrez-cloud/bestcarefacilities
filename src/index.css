@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Factorial brand hex (Design/coresfactorial.txt) */
+:root {
+  --factorial-radical-red: #ff355e;
+  --factorial-viridian: #07a2ad;
+  --factorial-sunbeam: #ffb940;
+  --factorial-tangerine: #ff9153;
+  --factorial-midnight: #25253d;
+}
+
 /* Factorial Design System
    All colors MUST be HSL.
    
@@ -45,7 +54,7 @@
 
     --radius: 0.25rem;
 
-    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
 
     /* Custom tokens */
     --factorial-red: 347 100% 60%;
