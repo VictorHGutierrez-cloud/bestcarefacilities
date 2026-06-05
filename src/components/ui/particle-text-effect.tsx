@@ -31,14 +31,22 @@ class Particle {
   targetColor = { r: 0, g: 0, b: 0 };
   colorWeight = 0;
   colorBlendRate = 0.01;
+  age = 0;
 
   move() {
+    this.age++;
+
     let proximityMult = 1;
     const distance = Math.hypot(this.pos.x - this.target.x, this.pos.y - this.target.y);
 
     if (distance < this.closeEnoughTarget) {
       proximityMult = distance / this.closeEnoughTarget;
     }
+
+    const rampFrames = 120;
+    const startSpeedFactor = 0.22;
+    const speedRamp = startSpeedFactor + (1 - startSpeedFactor) * Math.min(this.age / rampFrames, 1);
+    const effectiveSpeed = this.maxSpeed * proximityMult * speedRamp;
 
     const towardsTarget = {
       x: this.target.x - this.pos.x,
@@ -47,8 +55,8 @@ class Particle {
 
     const magnitude = Math.hypot(towardsTarget.x, towardsTarget.y);
     if (magnitude > 0) {
-      towardsTarget.x = (towardsTarget.x / magnitude) * this.maxSpeed * proximityMult;
-      towardsTarget.y = (towardsTarget.y / magnitude) * this.maxSpeed * proximityMult;
+      towardsTarget.x = (towardsTarget.x / magnitude) * effectiveSpeed;
+      towardsTarget.y = (towardsTarget.y / magnitude) * effectiveSpeed;
     }
 
     const steer = {
@@ -227,8 +235,9 @@ export function ParticleTextEffect({
             const randomPos = generateRandomPos(canvas.width / 2, canvas.height / 2, (canvas.width + canvas.height) / 2);
             particle.pos.x = randomPos.x;
             particle.pos.y = randomPos.y;
-            particle.maxSpeed = Math.random() * 6 + 4;
-            particle.maxForce = particle.maxSpeed * 0.05;
+            particle.maxSpeed = Math.random() * 2.5 + 2;
+            particle.maxForce = particle.maxSpeed * 0.04;
+            particle.age = 0;
             particle.particleSize = Math.random() * 5 + 4;
             particle.colorBlendRate = Math.random() * 0.0275 + 0.0025;
             particles.push(particle);
@@ -241,6 +250,7 @@ export function ParticleTextEffect({
           };
           particle.targetColor = newColor;
           particle.colorWeight = 0;
+          particle.age = 0;
           particle.target.x = x;
           particle.target.y = y;
         }

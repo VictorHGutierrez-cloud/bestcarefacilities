@@ -53,8 +53,8 @@ const columnClasses: Record<NonNullable<ColorfulPillCardsGridProps["columns"]>, 
 };
 
 const DEFAULT_ACCENT: PillCardAccent = {
-  pill: "border-[#FF355E]/45 bg-gradient-to-r from-[#FF355E]/30 via-[#ff6b8a]/20 to-[#FFB940]/15 hover:from-[#FF355E]/40 hover:shadow-[0_8px_30px_rgba(255,53,94,0.25)]",
-  icon: "bg-gradient-to-br from-[#FF355E] to-[#ff6b8a] text-white shadow-inner",
+  pill: "border-[#FF355E]/30 bg-[#FF355E]/12 hover:bg-[#FF355E]/18 hover:shadow-[0_6px_20px_rgba(255,53,94,0.12)]",
+  icon: "bg-[#FF355E]/80 text-white",
 };
 
 function PillCardRow({ item, theme }: { item: PillCardItem; theme: "dark" | "light" }) {
@@ -179,39 +179,15 @@ export function ColorfulPillCardsGrid({
   );
 }
 
-/** Vibrant accents for proposal slide cards (cycles by index). */
+/** Proposal slide cards: alternate Radical Red (opaque) and white. */
 export const SLIDE_PILL_ACCENTS: PillCardAccent[] = [
   {
-    pill: "border-[#FF355E]/50 bg-gradient-to-r from-[#FF355E]/35 to-rose-600/20 hover:shadow-[0_8px_28px_rgba(255,53,94,0.35)]",
-    icon: "bg-gradient-to-br from-[#FF355E] to-rose-500 text-white",
+    pill: "border-[#FF355E]/30 bg-[#FF355E]/12 hover:bg-[#FF355E]/18 hover:shadow-[0_6px_20px_rgba(255,53,94,0.12)]",
+    icon: "bg-[#FF355E]/80 text-white",
   },
   {
-    pill: "border-cyan-400/50 bg-gradient-to-r from-cyan-500/30 to-teal-500/20 hover:shadow-[0_8px_28px_rgba(34,211,238,0.3)]",
-    icon: "bg-gradient-to-br from-cyan-400 to-teal-500 text-white",
-  },
-  {
-    pill: "border-amber-400/50 bg-gradient-to-r from-amber-500/30 to-orange-500/20 hover:shadow-[0_8px_28px_rgba(251,191,36,0.3)]",
-    icon: "bg-gradient-to-br from-amber-400 to-orange-500 text-white",
-  },
-  {
-    pill: "border-violet-400/50 bg-gradient-to-r from-violet-500/30 to-purple-600/20 hover:shadow-[0_8px_28px_rgba(167,139,250,0.3)]",
-    icon: "bg-gradient-to-br from-violet-400 to-purple-600 text-white",
-  },
-  {
-    pill: "border-emerald-400/50 bg-gradient-to-r from-emerald-500/30 to-green-600/20 hover:shadow-[0_8px_28px_rgba(52,211,153,0.3)]",
-    icon: "bg-gradient-to-br from-emerald-400 to-green-600 text-white",
-  },
-  {
-    pill: "border-sky-400/50 bg-gradient-to-r from-sky-500/30 to-blue-600/20 hover:shadow-[0_8px_28px_rgba(56,189,248,0.3)]",
-    icon: "bg-gradient-to-br from-sky-400 to-blue-600 text-white",
-  },
-  {
-    pill: "border-fuchsia-400/50 bg-gradient-to-r from-fuchsia-500/30 to-pink-600/20 hover:shadow-[0_8px_28px_rgba(232,121,249,0.3)]",
-    icon: "bg-gradient-to-br from-fuchsia-400 to-pink-600 text-white",
-  },
-  {
-    pill: "border-lime-400/50 bg-gradient-to-r from-lime-500/25 to-emerald-500/20 hover:shadow-[0_8px_28px_rgba(163,230,53,0.25)]",
-    icon: "bg-gradient-to-br from-lime-400 to-emerald-500 text-slate-900",
+    pill: "border-border/80 bg-white hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]",
+    icon: "bg-white border border-border/70 text-[#FF355E]",
   },
 ];
 
